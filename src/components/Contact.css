@@ -1,0 +1,116 @@
+.contact {
+  background: var(--color-bg-secondary);
+}
+
+.contact-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-text {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-base);
+  width: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.contact-link:hover {
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px var(--color-accent-glow);
+}
+
+.contact-link-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-md);
+  color: var(--color-accent);
+}
+
+.contact-link-content {
+  flex: 1;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-link-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.contact-link-value {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.contact-link-arrow {
+  color: var(--color-text-muted);
+  transition: all var(--transition-base);
+}
+
+.contact-link:hover .contact-link-arrow {
+  color: var(--color-accent);
+  transform: translate(3px, -3px);
+}
+
+.contact-note {
+  padding: var(--spacing-lg);
+  background: var(--color-glass);
+  border: 1px solid var(--color-glass-border);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+}
+
+.contact-note p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.contact-note .highlight {
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .contact-link {
+    padding: var(--spacing-md);
+  }
+
+  .contact-link-icon {
+    width: 40px;
+    height: 40px;
+  }
+}

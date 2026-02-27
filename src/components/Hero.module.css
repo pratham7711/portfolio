@@ -1,0 +1,147 @@
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--color-bg-primary);
+}
+
+/* Layer 1: Large faded background text */
+.bgText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: clamp(20rem, 40vw, 50rem);
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.03);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+  z-index: 0;
+  white-space: nowrap;
+}
+
+/* Layer 2: 3D canvas */
+.canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Layer 3: Content */
+.content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: var(--font-size-hero);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.letter {
+  display: inline-block;
+  transform-origin: bottom;
+}
+
+.space {
+  width: 0.3em;
+}
+
+.subtitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--font-size-lg);
+  letter-spacing: 0.3em;
+  color: var(--color-text-secondary);
+  opacity: 0;
+}
+
+.subtitleText {
+  font-weight: 500;
+}
+
+.cursor {
+  color: var(--color-accent);
+  animation: blink 1s step-end infinite;
+}
+
+.tagline {
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.scrollIndicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  z-index: 3;
+}
+
+.scrollText {
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.2em;
+  color: var(--color-text-muted);
+}
+
+.scrollLine {
+  width: 1px;
+  height: 40px;
+  background: var(--color-accent);
+  transform-origin: top;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: clamp(1.8rem, 9vw, 4rem);
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+
+  .subtitle {
+    font-size: var(--font-size-xs);
+    letter-spacing: 0.1em;
+  }
+
+  .bgText {
+    font-size: clamp(10rem, 30vw, 20rem);
+  }
+
+  .scrollIndicator {
+    bottom: 2rem;
+  }
+}

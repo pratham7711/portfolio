@@ -1,0 +1,46 @@
+.dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: var(--z-cursor);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dot.hidden {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+}
+
+.circle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: calc(var(--z-cursor) - 1);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.circle.expanded {
+  width: 80px;
+  height: 80px;
+  border-color: var(--color-accent-dim);
+  background-color: var(--color-accent-glow);
+}
+
+@media (max-width: 768px) {
+  .dot,
+  .circle {
+    display: none;
+  }
+}

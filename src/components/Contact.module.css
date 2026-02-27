@@ -1,0 +1,125 @@
+.contact {
+  padding: var(--spacing-4xl) 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--color-bg-primary);
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+.label {
+  display: block;
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.3em;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-lg);
+}
+
+.heading {
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin-bottom: var(--spacing-4xl);
+  opacity: 0;
+}
+
+.accent {
+  color: var(--color-accent);
+}
+
+.email {
+  display: inline-block;
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-decoration: none;
+  margin-bottom: var(--spacing-4xl);
+  position: relative;
+  opacity: 0;
+  transition: color 0.3s ease;
+}
+
+.email::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+}
+
+.email:hover {
+  color: var(--color-accent);
+}
+
+.email:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.socials {
+  display: flex;
+  gap: var(--spacing-xl);
+  opacity: 0;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text-secondary);
+  transition: all 0.3s ease;
+}
+
+.socialLink:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  transform: translateY(-4px);
+}
+
+.socialLink svg {
+  width: 20px;
+  height: 20px;
+}
+
+.relocation {
+  margin-top: var(--spacing-2xl);
+  font-size: var(--font-size-sm);
+  letter-spacing: 0.15em;
+  color: var(--color-text-muted);
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .heading {
+    font-size: clamp(2rem, 10vw, 3rem);
+  }
+
+  .email {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+  }
+
+  .socials {
+    gap: var(--spacing-lg);
+  }
+
+  .socialLink {
+    width: 44px;
+    height: 44px;
+  }
+}
