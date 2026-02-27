@@ -25,7 +25,7 @@ const projects: Project[] = [
     description:
       'AI-powered document intelligence platform — upload PDFs, ask questions, get instant answers. Built with RAG architecture and vector search for context-aware responses.',
     tags: ['LangChain', 'OpenAI API', 'RAG', 'Pinecone', 'FastAPI', 'React'],
-    liveUrl: 'https://docmind-g4xctvkz2-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://docmind-ai-git-main-prathams-projects-371c8ade.vercel.app',
     link: 'https://github.com/pratham7711/docmind-ai',
     featured: true,
     accent: '#a78bfa',
@@ -36,7 +36,7 @@ const projects: Project[] = [
     description:
       'Real-time collaborative whiteboard with WebSocket-powered multi-cursor support, drawing tools, sticky notes, and live presence indicators.',
     tags: ['React', 'WebSockets', 'Canvas API', 'Node.js', 'Redis'],
-    liveUrl: 'https://collabboard-j05pxpqut-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://collabboard-git-main-prathams-projects-371c8ade.vercel.app',
     link: 'https://github.com/pratham7711/collabboard',
     featured: true,
     accent: '#34d399',
@@ -47,7 +47,7 @@ const projects: Project[] = [
     description:
       'Full-featured e-commerce platform with product search, cart management, Stripe payments, and a seller dashboard with real-time analytics.',
     tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Stripe', 'Prisma'],
-    liveUrl: 'https://shopwave-e6wenbxyv-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://shopwave-git-main-prathams-projects-371c8ade.vercel.app',
     link: 'https://github.com/pratham7711/shopwave',
     featured: true,
     accent: '#f59e0b',
@@ -58,7 +58,7 @@ const projects: Project[] = [
     description:
       'Developer activity dashboard aggregating GitHub contributions, LeetCode stats, and commit heatmaps into a single profile card you can embed anywhere.',
     tags: ['React', 'GraphQL', 'GitHub API', 'Node.js', 'Chart.js'],
-    liveUrl: 'https://devpulse-myd02f7fp-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://devpulse-git-main-prathams-projects-371c8ade.vercel.app',
     link: 'https://github.com/pratham7711/devpulse',
     featured: true,
     accent: '#60a5fa',
@@ -103,7 +103,7 @@ const projects: Project[] = [
     description:
       'Real-time data pipeline monitoring dashboard powered by Apache Kafka. Visualizes message throughput, consumer lag, and partition health at a glance.',
     tags: ['React', 'Apache Kafka', 'Node.js', 'WebSockets', 'Chart.js'],
-    liveUrl: 'https://streamdash-rj6jexd15-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://streamdash-git-main-prathams-projects-371c8ade.vercel.app',
     link: 'https://github.com/pratham7711/streamdash',
     accent: '#f97316',
   },
@@ -113,7 +113,7 @@ const projects: Project[] = [
     description:
       'AI-assisted design tool that generates UI component variants from text prompts, exports production-ready React code, and plugs into Figma workflows.',
     tags: ['React', 'Three.js', 'GSAP', 'TypeScript', 'Framer Motion'],
-    liveUrl: 'https://lumina-1g5arp3u4-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://lumina-git-main-prathams-projects-371c8ade.vercel.app',
     link: 'https://github.com/pratham7711/lumina',
     accent: '#c084fc',
   },
