@@ -121,8 +121,8 @@ const projects: Project[] = [
     number: '11',
     name: 'FLIGHT TRACKER',
     description:
-      'Live global flight tracker on an interactive 3D Earth globe. Tracks 10,000+ flights in real-time with zoom-aware airplane icons, altitude color-coding, and flight details on click.',
-    tags: ['React', 'Three.js', 'globe.gl', 'OpenSky API', 'Vite'],
+      'Real-time global flight tracker on an interactive 3D Earth globe. Visualizes 10,000+ live flights via OpenSky Network API with zoom-aware airplane icons that rotate to match heading, altitude color-coding, and click-to-inspect flight details. Backend powered by a Vercel serverless function using OAuth2 client credentials for authenticated API proxying and CORS handling.',
+    tags: ['React', 'Three.js', 'globe.gl', 'OpenSky API', 'Vercel Serverless', 'OAuth2', 'Vite'],
     liveUrl: 'https://flight-tracker-git-main-prathams-projects-371c8ade.vercel.app',
     link: 'https://github.com/pratham7711/flight-tracker',
     featured: true,
