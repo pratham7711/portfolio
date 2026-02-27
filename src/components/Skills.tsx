@@ -1,9 +1,56 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import type { IconType } from 'react-icons'
+import {
+  SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiRedux,
+  SiTailwindcss, SiStorybook, SiThreedotjs,
+  SiNodedotjs, SiExpress, SiSpring, SiOpenjdk, SiGraphql,
+  SiMongodb, SiPostgresql, SiFirebase, SiRedis,
+  SiOpenai, SiPython, SiFastapi,
+  SiAmazonwebservices, SiDocker, SiGithubactions, SiVercel, SiApachekafka,
+  SiJest, SiCypress, SiWebpack, SiVite,
+} from 'react-icons/si'
 import styles from './Skills.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
+
+interface SkillIcon {
+  icon: IconType
+  color: string
+}
+
+const SKILL_ICONS: Record<string, SkillIcon> = {
+  'React':                    { icon: SiReact,            color: '#61DAFB' },
+  'Next.js':                  { icon: SiNextdotjs,        color: '#ffffff' },
+  'TypeScript':               { icon: SiTypescript,       color: '#3178C6' },
+  'JavaScript':               { icon: SiJavascript,       color: '#F7DF1E' },
+  'Redux':                    { icon: SiRedux,            color: '#764ABC' },
+  'Tailwind CSS':             { icon: SiTailwindcss,      color: '#38BDF8' },
+  'Storybook':                { icon: SiStorybook,        color: '#FF4785' },
+  'Three.js':                 { icon: SiThreedotjs,       color: '#ffffff' },
+  'Node.js':                  { icon: SiNodedotjs,        color: '#339933' },
+  'Express.js':               { icon: SiExpress,          color: '#a3a3a3' },
+  'Java':                     { icon: SiOpenjdk,          color: '#E76F00' },
+  'Spring Boot':              { icon: SiSpring,           color: '#6DB33F' },
+  'GraphQL':                  { icon: SiGraphql,          color: '#E535AB' },
+  'MongoDB':                  { icon: SiMongodb,          color: '#47A248' },
+  'PostgreSQL':               { icon: SiPostgresql,       color: '#336791' },
+  'Firebase':                 { icon: SiFirebase,         color: '#FFCA28' },
+  'Redis':                    { icon: SiRedis,            color: '#DC382D' },
+  'OpenAI API':               { icon: SiOpenai,           color: '#ffffff' },
+  'Python':                   { icon: SiPython,           color: '#3776AB' },
+  'FastAPI':                  { icon: SiFastapi,          color: '#009688' },
+  'AWS (EC2, S3, Amplify)':   { icon: SiAmazonwebservices, color: '#FF9900' },
+  'Docker':                   { icon: SiDocker,           color: '#2496ED' },
+  'GitHub Actions':           { icon: SiGithubactions,    color: '#2088FF' },
+  'Vercel':                   { icon: SiVercel,           color: '#ffffff' },
+  'Apache Kafka':             { icon: SiApachekafka,      color: '#e4533a' },
+  'Jest':                     { icon: SiJest,             color: '#C21325' },
+  'Cypress':                  { icon: SiCypress,          color: '#17202C' },
+  'Webpack':                  { icon: SiWebpack,          color: '#8DD6F9' },
+  'Vite':                     { icon: SiVite,             color: '#646CFF' },
+}
 
 const skillCategories = [
   {
@@ -45,6 +92,24 @@ const skillCategories = [
 ]
 
 const learningSkills = ['Kubernetes', 'AWS Certified (in progress)', 'LLM Fine-tuning', 'Rust']
+
+function SkillBadge({ skill, className }: { skill: string; className: string }) {
+  const entry = SKILL_ICONS[skill]
+  return (
+    <span className={className}>
+      {entry ? (
+        <entry.icon
+          className={styles.skillIcon}
+          style={{ color: entry.color }}
+          aria-hidden="true"
+        />
+      ) : (
+        <span className={styles.skillDot} aria-hidden="true" />
+      )}
+      {skill}
+    </span>
+  )
+}
 
 export const Skills = () => {
   const sectionRef = useRef<HTMLElement>(null)
@@ -131,7 +196,7 @@ export const Skills = () => {
               <h3 className={styles.categoryTitle}>{cat.title}</h3>
               <div className={styles.badges}>
                 {cat.skills.map((skill) => (
-                  <span key={skill} className={styles.badge}>{skill}</span>
+                  <SkillBadge key={skill} skill={skill} className={styles.badge} />
                 ))}
               </div>
             </div>
@@ -142,7 +207,7 @@ export const Skills = () => {
           <h3 className={styles.learningTitle}>Currently Learning</h3>
           <div className={styles.badges}>
             {learningSkills.map((skill) => (
-              <span key={skill} className={styles.learningBadge}>{skill}</span>
+              <SkillBadge key={skill} skill={skill} className={styles.learningBadge} />
             ))}
           </div>
         </div>

@@ -120,6 +120,7 @@ const projects: Project[] = [
 ]
 
 const featuredProjects = projects.filter((p) => p.featured)
+const archiveProjects = projects.filter((p) => !p.featured)
 
 const STATS = [
   { value: '10', label: 'Projects Built' },
@@ -501,7 +502,7 @@ export const Projects = () => {
         </div>
 
         <div ref={trackRef} className={styles.track}>
-          {projects.map((project) => (
+          {archiveProjects.map((project) => (
             <div
               key={project.number}
               className={`${styles.card} ${project.comingSoon ? styles.cardComingSoon : ''}`}

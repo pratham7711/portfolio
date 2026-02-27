@@ -13,7 +13,9 @@ export const ProjectPreviewModal = ({ projectName, liveUrl, onClose }: ProjectPr
   const [currentText, setCurrentText] = useState('')
   const [showIframe, setShowIframe] = useState(false)
   const [iframeLoaded, setIframeLoaded] = useState(false)
+  const [iframeBlocked, setIframeBlocked] = useState(false)
   const terminalBodyRef = useRef<HTMLDivElement>(null)
+  const iframeRef = useRef<HTMLIFrameElement>(null)
 
   const lines = [
     '$ initializing secure tunnel...',
@@ -71,6 +73,25 @@ export const ProjectPreviewModal = ({ projectName, liveUrl, onClose }: ProjectPr
       terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight
     }
   }, [terminalLines, currentText])
+
+  const handleIframeLoad = () => {
+    try {
+      const doc = iframeRef.current?.contentDocument
+      // If we can access contentDocument and it has an empty body,
+      // the browser likely replaced the content with a blank/error page (X-Frame-Options)
+      if (doc && doc.body && !doc.body.children.length) {
+        setIframeBlocked(true)
+        return
+      }
+    } catch {
+      // SecurityError = cross-origin page loaded successfully — this is fine
+    }
+    setIframeLoaded(true)
+  }
+
+  const handleIframeError = () => {
+    setIframeBlocked(true)
+  }
 
   return (
     <div
@@ -174,6 +195,35 @@ export const ProjectPreviewModal = ({ projectName, liveUrl, onClose }: ProjectPr
                 )}
               </div>
             </div>
+          ) : iframeBlocked ? (
+            <div className={styles.blockedWrapper}>
+              <div className={styles.blockedShimmer} />
+              <div className={styles.blockedContent}>
+                <div className={styles.blockedIcon}>
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+                  </svg>
+                </div>
+                <h3 className={styles.blockedTitle}>{projectName}</h3>
+                <p className={styles.blockedMessage}>
+                  Live preview blocked by browser security (X-Frame-Options)
+                </p>
+                <a
+                  href={liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.blockedOpenBtn}
+                >
+                  Open Live Demo
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
           ) : (
             <div className={styles.iframeWrapper}>
               {!iframeLoaded && (
@@ -183,11 +233,15 @@ export const ProjectPreviewModal = ({ projectName, liveUrl, onClose }: ProjectPr
                 </div>
               )}
               <iframe
+                ref={iframeRef}
                 src={liveUrl}
                 className={`${styles.iframe} ${iframeLoaded ? styles.iframeVisible : ''}`}
                 title={`${projectName} Live Preview`}
-                onLoad={() => setIframeLoaded(true)}
+                onLoad={handleIframeLoad}
+                onError={handleIframeError}
                 allow="camera; microphone; fullscreen"
+                sandbox="allow-scripts allow-same-origin allow-forms"
+                referrerPolicy="no-referrer"
               />
             </div>
           )}

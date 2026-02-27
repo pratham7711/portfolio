@@ -53,6 +53,9 @@
 }
 
 .badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   background: var(--color-bg-secondary);
@@ -68,6 +71,22 @@
   border-color: var(--color-accent-dim);
   box-shadow: 0 0 14px var(--color-accent-glow);
   background: var(--color-bg-tertiary);
+}
+
+.skillIcon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.skillDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.4;
+  flex-shrink: 0;
 }
 
 .learningSection {
@@ -86,6 +105,9 @@
 }
 
 .learningBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: var(--font-size-sm);
   color: var(--color-accent);
   background: rgba(0, 229, 209, 0.05);
