@@ -236,11 +236,35 @@ export const Projects = () => {
     return () => ctx.revert()
   }, [])
 
-  // Horizontal scroll setup
+  // Horizontal scroll setup (desktop only)
   useLayoutEffect(() => {
     const section = sectionRef.current
     const track = trackRef.current
     if (!section || !track) return
+
+    // Skip horizontal scroll on mobile — show vertical grid instead
+    const isMobile = window.matchMedia('(max-width: 768px)').matches
+    if (isMobile) {
+      // Just animate the heading in
+      const ctx = gsap.context(() => {
+        gsap.fromTo(
+          headingRef.current,
+          { y: 60, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 80%',
+              toggleActions: 'play none none reverse',
+            },
+          }
+        )
+      }, section)
+      return () => ctx.revert()
+    }
 
     const ctx = gsap.context(() => {
       gsap.fromTo(

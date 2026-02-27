@@ -127,21 +127,48 @@
 
 @media (max-width: 768px) {
   .title {
-    font-size: clamp(1.8rem, 9vw, 4rem);
+    font-size: clamp(1.6rem, 8.5vw, 3.5rem);
     flex-wrap: nowrap;
     white-space: nowrap;
   }
 
   .subtitle {
     font-size: var(--font-size-xs);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
+  }
+
+  .tagline {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    padding: 0 var(--spacing-md);
+    text-align: center;
   }
 
   .bgText {
-    font-size: clamp(10rem, 30vw, 20rem);
+    font-size: clamp(8rem, 28vw, 18rem);
   }
 
   .scrollIndicator {
-    bottom: 2rem;
+    bottom: 1.5rem;
+  }
+
+  .content {
+    gap: 1rem;
+    padding: 0 var(--spacing-md);
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: clamp(1.4rem, 7vw, 2.5rem);
+  }
+
+  .canvas {
+    opacity: 0.35;
+  }
+
+  .bgText {
+    display: none;
   }
 }

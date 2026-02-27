@@ -115,6 +115,19 @@
 }
 
 @media (max-width: 768px) {
+  .experience {
+    min-height: auto;
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+
+  .heading {
+    margin-bottom: var(--spacing-2xl);
+  }
+
   .timeline {
     gap: var(--spacing-2xl);
   }
@@ -135,18 +148,43 @@
   .timelineDot {
     width: 12px;
     height: 12px;
-    margin-top: 0.25rem;
+    margin-top: 0.4rem;
+    flex-shrink: 0;
   }
 
   .timelineRight {
-    padding-left: var(--spacing-md);
+    padding-left: var(--spacing-sm);
   }
 
+  /* Show company name via data attribute on mobile */
   .timelineRight::before {
     content: attr(data-company);
     display: block;
     font-size: var(--font-size-lg);
     font-weight: 700;
+    letter-spacing: 0.05em;
     margin-bottom: var(--spacing-xs);
+    color: var(--color-text-primary);
+  }
+
+  /* Show dates via data attribute */
+  .timelineRight::after {
+    content: attr(data-dates);
+    display: block;
+    font-size: var(--font-size-xs);
+    color: var(--color-accent);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .achievement {
+    font-size: var(--font-size-sm);
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--spacing-md);
   }
 }

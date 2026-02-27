@@ -130,7 +130,50 @@
 }
 
 @media (max-width: 768px) {
+  .skills {
+    padding: var(--spacing-3xl) 0;
+  }
+
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+
   .heading {
     font-size: clamp(1.8rem, 8vw, 2.5rem);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .categories {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .badge {
+    font-size: var(--font-size-xs);
+    padding: 0.2rem 0.5rem;
+    gap: 4px;
+  }
+
+  .skillIcon {
+    width: 13px;
+    height: 13px;
+  }
+
+  .learningBadge {
+    font-size: var(--font-size-xs);
+    padding: 0.2rem 0.5rem;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+
+  .categories {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
   }
 }

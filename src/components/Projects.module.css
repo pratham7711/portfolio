@@ -864,46 +864,41 @@
 }
 
 @media (max-width: 768px) {
+  /* ── Featured section ── */
   .featured {
-    padding: var(--spacing-2xl) var(--spacing-md);
+    padding: var(--spacing-2xl) var(--spacing-lg);
     min-height: auto;
-    padding-top: 6rem;
+    padding-top: 5rem;
+    align-items: flex-start;
+  }
+
+  .featuredInner {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  .featuredVisual {
+    order: -1;
   }
 
   .featuredName {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 
-  .header {
-    top: var(--spacing-lg);
-    left: var(--spacing-md);
-  }
-
-  .progressTrack {
-    width: 120px;
-  }
-
-  .card {
-    padding: var(--spacing-md);
-    padding-top: 8rem;
-  }
-
-  .cardInner {
-    padding: var(--spacing-xl);
-  }
-
-  .number {
-    font-size: 4rem;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
-  }
-
-  .name {
-    font-size: 1.3rem;
-  }
-
-  .description {
+  .featuredDescription {
     font-size: var(--font-size-base);
+  }
+
+  .featuredActions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .previewBtn,
+  .githubLink {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
   }
 
   .fakeBrowserContent {
@@ -920,5 +915,81 @@
 
   .previewCards > :last-child {
     display: none;
+  }
+
+  /* ── Archive section — convert to vertical on mobile ── */
+  .projects {
+    height: auto;
+    overflow: visible;
+    padding: var(--spacing-2xl) 0 var(--spacing-3xl);
+  }
+
+  .header {
+    position: static;
+    padding: 0 var(--spacing-lg);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .progressTrack {
+    width: 120px;
+  }
+
+  /* Override horizontal flex to vertical grid */
+  .track {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: auto;
+    width: 100%;
+    padding: 0 var(--spacing-lg);
+    gap: var(--spacing-xl);
+  }
+
+  .card {
+    width: 100%;
+    height: auto;
+    padding: 0;
+  }
+
+  .cardInner {
+    padding: var(--spacing-xl);
+    max-width: 100%;
+  }
+
+  .number {
+    font-size: 4rem;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+  }
+
+  .name {
+    font-size: 1.3rem;
+  }
+
+  .description {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .featured {
+    padding: var(--spacing-xl) var(--spacing-md);
+    padding-top: 4.5rem;
+  }
+
+  .header {
+    padding: 0 var(--spacing-md);
+  }
+
+  .track {
+    padding: 0 var(--spacing-md);
+    gap: var(--spacing-lg);
+  }
+
+  .cardInner {
+    padding: var(--spacing-lg);
+  }
+
+  .featuredActions {
+    gap: var(--spacing-sm);
   }
 }

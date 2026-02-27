@@ -72,6 +72,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   cursor: none;
+  overflow-x: hidden;
 }
 
 body {
@@ -208,9 +209,9 @@ img {
 
 @media (max-width: 768px) {
   :root {
-    --font-size-5xl: 2.5rem;
-    --font-size-6xl: 3rem;
-    --font-size-hero: clamp(2.5rem, 12vw, 4rem);
+    --font-size-5xl: 2rem;
+    --font-size-6xl: 2.5rem;
+    --font-size-hero: clamp(2rem, 11vw, 4rem);
   }
 
   .section {
@@ -218,8 +219,35 @@ img {
     min-height: auto;
   }
 
+  .container {
+    padding: 0 var(--spacing-lg);
+  }
+
+  .section-heading {
+    font-size: var(--font-size-4xl);
+  }
+
   /* Show default cursor on mobile */
   html, body, a, button {
     cursor: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --font-size-hero: clamp(1.8rem, 9.5vw, 3.5rem);
+  }
+
+  .container {
+    padding: 0 var(--spacing-md);
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -118,7 +118,7 @@ export const Experience = () => {
                 <span className={styles.location}>{exp.location}</span>
               </div>
               <div className={styles.timelineDot} />
-              <div className={styles.timelineRight}>
+              <div className={styles.timelineRight} data-company={exp.company} data-dates={exp.dates}>
                 <span className={styles.role}>{exp.role}</span>
                 <p className={styles.achievement}>{exp.achievement}</p>
               </div>
