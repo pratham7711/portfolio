@@ -23,9 +23,9 @@ const projects: Project[] = [
     number: '01',
     name: 'DOCMIND AI',
     description:
-      'AI-powered document intelligence platform — upload PDFs, ask questions, get instant answers. Built with RAG architecture and vector search for context-aware responses.',
-    tags: ['LangChain', 'OpenAI API', 'RAG', 'Pinecone', 'FastAPI', 'React'],
-    liveUrl: 'https://docmind-ai-git-main-prathams-projects-371c8ade.vercel.app',
+      'AI-powered document intelligence platform — upload PDFs, ask questions, get cited answers via RAG. Built with FastAPI, LangChain, Pinecone integrated embeddings (multilingual-e5-large), Gemini Flash streaming, Google OAuth, Supabase PostgreSQL, and Upstash Redis rate limiting.',
+    tags: ['Next.js', 'FastAPI', 'LangChain', 'Pinecone', 'Gemini Flash', 'RAG', 'PostgreSQL', 'Supabase', 'Upstash Redis', 'NextAuth', 'Python', 'TypeScript', 'Tailwind CSS', 'Railway', 'Vercel'],
+    liveUrl: 'https://frontend-mu-five-51.vercel.app',
     link: 'https://github.com/pratham7711/docmind-ai',
     featured: true,
     accent: '#a78bfa',
@@ -91,10 +91,11 @@ const projects: Project[] = [
   },
   {
     number: '08',
-    name: 'LEEGALITY DESIGN SYSTEM',
+    name: '@PRATHAM/UI',
     description:
-      'Enterprise-grade UI component library standardizing design across multiple teams. Built with atomic design principles, 50+ components, and comprehensive Storybook docs.',
-    tags: ['React', 'TypeScript', 'ShadCN', 'Storybook', 'Rollup', 'Design System'],
+      'Personal open-source React component library powering all 11 portfolio projects. 18 components, CSS custom properties token system, dark-first glassmorphism aesthetic, Space Grotesk typography, and full Storybook documentation.',
+    tags: ['React', 'TypeScript', 'Vite', 'Storybook', 'Design System', 'CSS Tokens'],
+    liveUrl: 'https://pratham-ui.vercel.app',
     accent: '#00E5D1',
   },
   {
@@ -134,7 +135,7 @@ const featuredProjects = projects.filter((p) => p.featured)
 const archiveProjects = projects.filter((p) => !p.featured)
 
 const STATS = [
-  { value: '10', label: 'Projects Built' },
+  { value: '11', label: 'Projects Built' },
   { value: '3', label: 'Countries Targeted' },
   { value: '4', label: 'AI Models Integrated' },
   { value: '50+', label: 'React Components' },
@@ -174,6 +175,8 @@ const TAG_COLORS: Record<string, string> = {
   Rollup: '#EC4A3F',
   ShadCN: '#94a3b8',
   'Design System': '#6366F1',
+  'CSS Tokens': '#00E5D1',
+  Vite: '#646CFF',
   'Apache Kafka': '#e4533a',
   'Figma Plugin API': '#F24E1E',
   'Real-time': '#10B981',

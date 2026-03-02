@@ -7,8 +7,8 @@ import {
   SiTailwindcss, SiStorybook, SiThreedotjs,
   SiNodedotjs, SiExpress, SiSpring, SiOpenjdk, SiGraphql,
   SiMongodb, SiPostgresql, SiFirebase, SiRedis,
-  SiOpenai, SiPython, SiFastapi,
-  SiAmazonwebservices, SiDocker, SiGithubactions, SiVercel, SiApachekafka,
+  SiOpenai, SiPython, SiFastapi, SiLangchain, SiGooglegemini, SiSupabase, SiUpstash,
+  SiAmazonwebservices, SiDocker, SiGithubactions, SiVercel, SiApachekafka, SiRailway,
   SiJest, SiCypress, SiWebpack, SiVite,
 } from 'react-icons/si'
 import styles from './Skills.module.css'
@@ -41,11 +41,16 @@ const SKILL_ICONS: Record<string, SkillIcon> = {
   'OpenAI API':               { icon: SiOpenai,           color: '#ffffff' },
   'Python':                   { icon: SiPython,           color: '#3776AB' },
   'FastAPI':                  { icon: SiFastapi,          color: '#009688' },
+  'LangChain':                { icon: SiLangchain,        color: '#1C3C3C' },
+  'Gemini Flash':             { icon: SiGooglegemini,     color: '#8E75B2' },
+  'Supabase':                 { icon: SiSupabase,         color: '#3ECF8E' },
+  'Upstash Redis':            { icon: SiUpstash,          color: '#00E9A3' },
   'AWS (EC2, S3, Amplify)':   { icon: SiAmazonwebservices, color: '#FF9900' },
   'Docker':                   { icon: SiDocker,           color: '#2496ED' },
   'GitHub Actions':           { icon: SiGithubactions,    color: '#2088FF' },
   'Vercel':                   { icon: SiVercel,           color: '#ffffff' },
   'Apache Kafka':             { icon: SiApachekafka,      color: '#e4533a' },
+  'Railway':                  { icon: SiRailway,          color: '#ffffff' },
   'Jest':                     { icon: SiJest,             color: '#C21325' },
   'Cypress':                  { icon: SiCypress,          color: '#17202C' },
   'Webpack':                  { icon: SiWebpack,          color: '#8DD6F9' },
@@ -68,18 +73,18 @@ const skillCategories = [
   },
   {
     title: 'Databases',
-    skills: ['MongoDB', 'PostgreSQL', 'DynamoDB', 'Firebase', 'Redis', 'SQL'],
+    skills: ['MongoDB', 'PostgreSQL', 'Supabase', 'DynamoDB', 'Firebase', 'Redis', 'Upstash Redis', 'SQL'],
   },
   {
     title: 'AI & ML',
     skills: [
-      'LangChain', 'OpenAI API', 'RAG', 'Pinecone', 'Python', 'FastAPI', 'Prompt Engineering',
+      'LangChain', 'Gemini Flash', 'OpenAI API', 'RAG', 'Pinecone', 'Python', 'FastAPI', 'Prompt Engineering',
     ],
   },
   {
     title: 'Cloud & DevOps',
     skills: [
-      'AWS (EC2, S3, Amplify)', 'Docker', 'GitHub Actions', 'CI/CD', 'Vercel', 'Apache Kafka',
+      'AWS (EC2, S3, Amplify)', 'Docker', 'GitHub Actions', 'CI/CD', 'Vercel', 'Railway', 'Apache Kafka',
     ],
   },
   {
