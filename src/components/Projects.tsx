@@ -36,7 +36,7 @@ const projects: Project[] = [
     description:
       'Real-time collaborative whiteboard with WebSocket-powered multi-cursor support, drawing tools, sticky notes, and live presence indicators.',
     tags: ['React', 'WebSockets', 'Canvas API', 'Node.js', 'Redis'],
-    liveUrl: 'https://collabboard-git-main-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://collabboard-phi.vercel.app',
     link: 'https://github.com/pratham7711/collabboard',
     featured: true,
     accent: '#34d399',
@@ -47,7 +47,7 @@ const projects: Project[] = [
     description:
       'Full-featured e-commerce platform with product search, cart management, Stripe payments, and a seller dashboard with real-time analytics.',
     tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Stripe', 'Prisma'],
-    liveUrl: 'https://shopwave-git-main-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://shopwave-green.vercel.app',
     link: 'https://github.com/pratham7711/shopwave',
     featured: true,
     accent: '#f59e0b',
@@ -104,7 +104,7 @@ const projects: Project[] = [
     description:
       'Real-time data pipeline monitoring dashboard powered by Apache Kafka. Visualizes message throughput, consumer lag, and partition health at a glance.',
     tags: ['React', 'Apache Kafka', 'Node.js', 'WebSockets', 'Chart.js'],
-    liveUrl: 'https://streamdash-git-main-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://streamdash-virid.vercel.app',
     link: 'https://github.com/pratham7711/streamdash',
     accent: '#f97316',
   },
@@ -114,7 +114,7 @@ const projects: Project[] = [
     description:
       'AI-assisted design tool that generates UI component variants from text prompts, exports production-ready React code, and plugs into Figma workflows.',
     tags: ['React', 'Three.js', 'GSAP', 'TypeScript', 'Framer Motion'],
-    liveUrl: 'https://lumina-git-main-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://lumina-beta-one.vercel.app',
     link: 'https://github.com/pratham7711/lumina',
     accent: '#c084fc',
   },
@@ -124,7 +124,7 @@ const projects: Project[] = [
     description:
       'Real-time global flight tracker on an interactive 3D Earth globe. Visualizes 10,000+ live flights via OpenSky Network API with zoom-aware airplane icons that rotate to match heading, altitude color-coding, and click-to-inspect flight details. Backend powered by a Vercel serverless function using OAuth2 client credentials for authenticated API proxying and CORS handling.',
     tags: ['React', 'Three.js', 'globe.gl', 'OpenSky API', 'Vercel Serverless', 'OAuth2', 'Vite'],
-    liveUrl: 'https://flight-tracker-git-main-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://flight-tracker-two-sable.vercel.app',
     link: 'https://github.com/pratham7711/flight-tracker',
     featured: true,
     accent: '#38bdf8',
