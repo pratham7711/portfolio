@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 :root {
+  /* @pratham/ui token overrides — portfolio cinematic dark theme */
+  --ui-accent: #00E5D1;
+  --ui-bg-base: #0a0a0a;
+  --ui-text-primary: #ffffff;
+  --ui-text-secondary: rgba(255, 255, 255, 0.7);
+
   /* Colors */
   --color-bg-primary: #0a0a0a;
   --color-bg-secondary: #111113;
@@ -27,7 +33,7 @@
   --font-size-4xl: 2.5rem;
   --font-size-5xl: 3.5rem;
   --font-size-6xl: 4.5rem;
-  --font-size-hero: clamp(4rem, 15vw, 12rem);
+  --font-size-hero: clamp(4rem, 9vw, 10rem);
 
   /* Spacing */
   --spacing-xs: 0.25rem;

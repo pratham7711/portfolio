@@ -56,6 +56,9 @@
   white-space: nowrap;
   justify-content: center;
   overflow: hidden;
+  padding-bottom: 0.1em; /* prevent descender clipping */
+  max-width: 100vw;
+  width: 100%;
 }
 
 .letter {
