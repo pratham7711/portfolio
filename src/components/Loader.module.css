@@ -50,3 +50,9 @@
     width: 150px;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .progress {
+    transform: scaleX(1);
+  }
+}

@@ -96,91 +96,84 @@ export const Hero = () => {
   }, [])
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Stagger letter animation
-      gsap.fromTo(
-        lettersRef.current.filter(Boolean),
-        { y: 100, opacity: 0, rotateX: -90 },
-        {
-          y: 0,
-          opacity: 1,
-          rotateX: 0,
-          duration: 1,
-          stagger: 0.06,
-          delay: 3.2,
-          ease: 'power4.out',
+    const mm = gsap.matchMedia()
+
+    mm.add(
+      { reduceMotion: '(prefers-reduced-motion: reduce)' },
+      (context) => {
+        const { reduceMotion } = context.conditions as { reduceMotion: boolean }
+
+        if (reduceMotion) {
+          // Skip entrance + parallax; reveal everything instantly.
+          gsap.set(lettersRef.current.filter(Boolean), { y: 0, opacity: 1, rotateX: 0 })
+          if (subtitleRef.current) gsap.set(subtitleRef.current, { opacity: 1, y: 0 })
+          if (scrollIndicatorRef.current) gsap.set(scrollIndicatorRef.current, { opacity: 1 })
+          return
         }
-      )
 
-      // Subtitle
-      if (subtitleRef.current) {
         gsap.fromTo(
-          subtitleRef.current,
-          { opacity: 0, y: 20 },
-          { opacity: 1, y: 0, duration: 0.8, delay: 4, ease: 'power3.out' }
-        )
-      }
-
-      // Scroll indicator
-      if (scrollIndicatorRef.current) {
-        gsap.fromTo(
-          scrollIndicatorRef.current,
-          { opacity: 0 },
-          { opacity: 1, duration: 1, delay: 4.5 }
+          lettersRef.current.filter(Boolean),
+          { y: 100, opacity: 0, rotateX: -90 },
+          {
+            y: 0,
+            opacity: 1,
+            rotateX: 0,
+            duration: 1,
+            stagger: 0.06,
+            delay: 3.2,
+            ease: 'power4.out',
+          }
         )
 
-        gsap.to(scrollIndicatorRef.current.querySelector(`.${styles.scrollLine}`), {
-          scaleY: 1.5,
-          repeat: -1,
-          yoyo: true,
-          duration: 1,
-          ease: 'power1.inOut',
-          delay: 4.5,
-        })
-      }
+        if (subtitleRef.current) {
+          gsap.fromTo(
+            subtitleRef.current,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.8, delay: 4, ease: 'power3.out' }
+          )
+        }
 
-      // Parallax layers on scroll
-      if (bgTextRef.current) {
-        gsap.to(bgTextRef.current, {
-          y: -100,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-          },
-        })
-      }
+        if (scrollIndicatorRef.current) {
+          gsap.fromTo(
+            scrollIndicatorRef.current,
+            { opacity: 0 },
+            { opacity: 1, duration: 1, delay: 4.5 }
+          )
 
-      if (canvasLayerRef.current) {
-        gsap.to(canvasLayerRef.current, {
-          y: -250,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-          },
-        })
-      }
+          gsap.to(scrollIndicatorRef.current.querySelector(`.${styles.scrollLine}`), {
+            scaleY: 1.5,
+            repeat: -1,
+            yoyo: true,
+            duration: 1,
+            ease: 'power1.inOut',
+            delay: 4.5,
+          })
+        }
 
-      if (contentLayerRef.current) {
-        gsap.to(contentLayerRef.current, {
-          y: -400,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true,
-          },
-        })
-      }
-    }, heroRef)
+        const parallaxTargets: Array<[HTMLElement | null, number]> = [
+          [bgTextRef.current, -100],
+          [canvasLayerRef.current, -250],
+          [contentLayerRef.current, -400],
+        ]
 
-    return () => ctx.revert()
+        parallaxTargets.forEach(([el, y]) => {
+          if (!el) return
+          gsap.to(el, {
+            y,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: 'top top',
+              end: 'bottom top',
+              scrub: true,
+            },
+          })
+        })
+      },
+      heroRef
+    )
+
+    return () => mm.revert()
   }, [])
 
   return (

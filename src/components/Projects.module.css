@@ -1,88 +1,4 @@
 /* ─────────────────────────────────────────
-   STATS TICKER
-───────────────────────────────────────── */
-.tickerWrapper {
-  width: 100%;
-  overflow: hidden;
-  background: var(--color-bg-secondary);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  padding: 0;
-  position: relative;
-  z-index: 2;
-}
-
-.tickerWrapper::before,
-.tickerWrapper::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 80px;
-  z-index: 3;
-  pointer-events: none;
-}
-
-.tickerWrapper::before {
-  left: 0;
-  background: linear-gradient(to right, var(--color-bg-secondary), transparent);
-}
-
-.tickerWrapper::after {
-  right: 0;
-  background: linear-gradient(to left, var(--color-bg-secondary), transparent);
-}
-
-.tickerInner {
-  overflow: hidden;
-}
-
-.tickerTrack {
-  display: flex;
-  width: max-content;
-  animation: tickerScroll 28s linear infinite;
-}
-
-@keyframes tickerScroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-.tickerTrack:hover {
-  animation-play-state: paused;
-}
-
-.tickerItem {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.75rem 2rem;
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-
-.tickerValue {
-  font-size: var(--font-size-sm);
-  font-weight: 700;
-  color: var(--color-accent);
-  letter-spacing: 0.05em;
-}
-
-.tickerLabel {
-  font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.tickerDivider {
-  font-size: 0.45rem;
-  color: var(--color-accent);
-  opacity: 0.4;
-  margin-left: 0.6rem;
-}
-
-/* ─────────────────────────────────────────
    FEATURED SECTION
 ───────────────────────────────────────── */
 .featured {
@@ -279,16 +195,16 @@
   inset: 0;
   background: var(--btn-accent, var(--color-accent));
   opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: opacity 0.15s ease;
 }
 
 .previewBtn:hover::before {
-  opacity: 0.12;
+  opacity: 0.15;
 }
 
 .previewBtn:hover {
-  box-shadow: 0 0 20px color-mix(in srgb, var(--btn-accent, var(--color-accent)) 30%, transparent);
-  transform: translateY(-1px);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--btn-accent, var(--color-accent)) 35%, transparent);
+  transform: translateY(-2px);
 }
 
 .previewBtn:active {
@@ -356,16 +272,20 @@
   border-radius: 50%;
   background: var(--color-border);
   cursor: none;
-  transition: background 0.3s ease, transform 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   border: none;
+  padding: 0;
 }
 
 .navDot:hover {
-  transform: scale(1.4);
+  transform: scale(1.3);
+  background: var(--color-accent-dim);
 }
 
 .navDotActive {
-  transform: scale(1.4);
+  transform: scale(1.5);
+  background: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent-dim);
 }
 
 /* ─────────────────────────────────────────

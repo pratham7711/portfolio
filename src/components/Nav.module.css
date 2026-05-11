@@ -142,9 +142,25 @@
   border-bottom: none;
 }
 
+.mobileLink:hover,
 .mobileLink:active {
   color: var(--color-accent);
-  background: var(--color-accent-glow);
+  background: rgba(0, 229, 209, 0.06);
+}
+
+.mobileLink:focus-visible {
+  outline: none;
+  color: var(--color-accent);
+  background: rgba(0, 229, 209, 0.08);
+}
+
+.link:focus-visible {
+  outline: none;
+  color: var(--color-accent);
+}
+
+.link:focus-visible::after {
+  width: 100%;
 }
 
 @media (max-width: 768px) {

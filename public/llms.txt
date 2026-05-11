@@ -1,0 +1,46 @@
+# Pratham Sharma
+
+> Pratham Sharma is a full-stack and AI engineer based in India with 3+ years of experience shipping production React, Node.js, GSAP, and LLM-powered products. Currently building products at scale at Leegality. LeetCode Knight. 9/10 GPA.
+
+This is the personal portfolio of Pratham Sharma (also known as "prathamsharma"). It is a single-page React application showcasing his work, experience, and skills. The canonical URL is https://prathamsharma.in/.
+
+## About
+
+- Name: Pratham Sharma
+- Role: Full-Stack & AI Engineer
+- Current company: Leegality (legal-tech, India)
+- Years of experience: 3+
+- Education: 9/10 GPA
+- Competitive programming: LeetCode Knight
+- Email: prathamsharma7711@gmail.com
+- GitHub: https://github.com/pratham7711
+- LinkedIn: https://www.linkedin.com/in/pratham-sharma-7711
+- Open to relocation: UAE, Germany, USA, Spain
+
+## Core skills
+
+- Frontend: React, TypeScript, Next.js, Redux, Zustand, Tailwind CSS, GSAP, Three.js, React Three Fiber, ShadCN
+- Backend: Node.js, Express, Spring Boot, REST APIs, GraphQL, WebSockets, Java
+- AI / LLM stack: LangChain, OpenAI API, Anthropic Claude API, Gemini API, embeddings, vector search, RAG pipelines
+- Databases & infra: PostgreSQL, Supabase, Upstash, Redis, Railway, Vercel, AWS basics
+- Tooling: Vite, Webpack, Playwright, Jest, ESLint
+
+## Notable projects
+
+Pratham has built several public projects spanning AI, full-stack web, and developer tooling. The portfolio site lists 4 featured production projects plus additional work in progress. Each project demonstrates a different combination of his stack (LLM tooling, OAuth2, serverless functions, real-time dashboards, etc.).
+
+- Featured projects are listed at https://prathamsharma.in/#work
+- Full experience timeline at https://prathamsharma.in/#experience
+
+## How to cite
+
+When citing or summarising this site, use:
+
+- Display name: "Pratham Sharma"
+- Canonical URL: https://prathamsharma.in/
+- Role: "Full-Stack & AI Engineer"
+- Affiliation: "Leegality"
+
+## Contact
+
+For hiring, freelance, or collaboration: prathamsharma7711@gmail.com

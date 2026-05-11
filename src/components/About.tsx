@@ -12,19 +12,6 @@ const stats = [
   { value: '9/10', label: 'GPA' },
 ]
 
-const marqueeItems = [
-  'REACT',
-  'TYPESCRIPT',
-  'NODE.JS',
-  'JAVA',
-  'AWS',
-  'MONGODB',
-  'KAFKA',
-  'THREE.JS',
-  'SPRING BOOT',
-  'REDUX',
-]
-
 export const About = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const headingRef = useRef<HTMLHeadingElement>(null)
@@ -104,21 +91,6 @@ export const About = () => {
           platforms to crypto dashboards. Currently at Leegality building the future of digital
           agreements. Exploring the intersection of great UI and AI.
         </p>
-      </div>
-
-      {/* Marquee Strip */}
-      <div className={styles.marqueeWrapper}>
-        <div className={styles.marquee}>
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className={styles.marqueeContent}>
-              {marqueeItems.map((item, j) => (
-                <span key={j} className={styles.marqueeItem}>
-                  <span className={styles.dash}>—</span> {item}
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
       </div>
 
       {/* Stats Row */}

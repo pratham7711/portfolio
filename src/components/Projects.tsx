@@ -134,17 +134,6 @@ const projects: Project[] = [
 const featuredProjects = projects.filter((p) => p.featured)
 const archiveProjects = projects.filter((p) => !p.featured)
 
-const STATS = [
-  { value: '11', label: 'Projects Built' },
-  { value: '3', label: 'Countries Targeted' },
-  { value: '4', label: 'AI Models Integrated' },
-  { value: '50+', label: 'React Components' },
-  { value: '3+', label: 'Years Experience' },
-  { value: '4', label: 'Companies Worked' },
-  { value: '9/10', label: 'GPA Score' },
-  { value: '∞', label: 'Lines of Code' },
-]
-
 const TAG_COLORS: Record<string, string> = {
   React: '#61DAFB',
   TypeScript: '#3178C6',
@@ -194,7 +183,6 @@ export const Projects = () => {
   const headingRef = useRef<HTMLHeadingElement>(null)
   const progressBarRef = useRef<HTMLDivElement>(null)
   const featuredRef = useRef<HTMLElement>(null)
-  const tickerRef = useRef<HTMLDivElement>(null)
 
   const [activeModal, setActiveModal] = useState<{ name: string; url: string } | null>(null)
   const [featuredIndex, setFeaturedIndex] = useState(0)
@@ -333,21 +321,6 @@ export const Projects = () => {
 
   return (
     <>
-      {/* Stats Ticker */}
-      <div className={styles.tickerWrapper}>
-        <div className={styles.tickerInner} ref={tickerRef}>
-          <div className={styles.tickerTrack}>
-            {[...STATS, ...STATS].map((stat, i) => (
-              <div key={i} className={styles.tickerItem}>
-                <span className={styles.tickerValue}>{stat.value}</span>
-                <span className={styles.tickerLabel}>{stat.label}</span>
-                <span className={styles.tickerDivider}>◆</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Featured Project Showcase */}
       <section ref={featuredRef} id="work" className={styles.featured}>
         <div className={styles.featuredInner}>

@@ -18,36 +18,38 @@ function App() {
   useEffect(() => {
     if (isLoading) return
 
-    const ctx = gsap.context(() => {
-      // Scroll progress indicator
-      if (progressRef.current) {
-        gsap.to(progressRef.current, {
-          scaleX: 1,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: document.body,
-            start: 'top top',
-            end: 'bottom bottom',
-            scrub: 0.3,
-          },
+    const mm = gsap.matchMedia()
+
+    mm.add(
+      { reduceMotion: '(prefers-reduced-motion: reduce)' },
+      (context) => {
+        const { reduceMotion } = context.conditions as { reduceMotion: boolean }
+
+        if (progressRef.current) {
+          gsap.to(progressRef.current, {
+            scaleX: 1,
+            ease: 'none',
+            scrollTrigger: {
+              trigger: document.body,
+              start: 'top top',
+              end: 'bottom bottom',
+              scrub: reduceMotion ? false : 0.3,
+            },
+          })
+        }
+
+        document.querySelectorAll('.section-heading').forEach((heading) => {
+          ScrollTrigger.create({
+            trigger: heading,
+            start: 'top 80%',
+            onEnter: () => heading.classList.add('in-view'),
+            onLeaveBack: () => heading.classList.remove('in-view'),
+          })
         })
       }
+    )
 
-      // Section title reveal animations
-      document.querySelectorAll('.section-heading').forEach((heading) => {
-        ScrollTrigger.create({
-          trigger: heading,
-          start: 'top 80%',
-          onEnter: () => heading.classList.add('in-view'),
-          onLeaveBack: () => heading.classList.remove('in-view'),
-        })
-      })
-    })
-
-    return () => {
-      ctx.revert()
-      ScrollTrigger.getAll().forEach((st) => st.kill())
-    }
+    return () => mm.revert()
   }, [isLoading])
 
   return (
@@ -56,11 +58,13 @@ function App() {
       <Cursor />
 
       <div ref={mainRef} className="app">
+        <a href="#main-content" className="skip-link">Skip to content</a>
+
         {/* Scroll progress indicator */}
         <div ref={progressRef} className="scroll-progress" />
 
         <Nav />
-        <main>
+        <main id="main-content">
           <Hero />
           <About />
           <Experience />
