@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Higgsfield Concepts — Live Previews</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #111113;
+      --accent: #00E5D1;
+      --line: rgba(255,255,255,0.08);
+      --muted: rgba(255,255,255,0.55);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      background: var(--bg);
+      color: #fff;
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+    /* Film grain to match the site */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    header {
+      padding: 2rem clamp(1rem, 4vw, 3rem);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    h1 {
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    h1 .accent { color: var(--accent); }
+    header p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 1.5rem;
+      padding: 1.5rem clamp(1rem, 4vw, 3rem) 4rem;
+    }
+    .card {
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .stage {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: radial-gradient(ellipse at center, #0a0a0a 0%, #060607 100%);
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .stage::after {
+      content: 'CLICK TO REPLAY';
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.25);
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .stage:hover::after { opacity: 0; }
+
+    .meta {
+      padding: 1.25rem 1.5rem 1.5rem;
+      border-top: 1px solid var(--line);
+    }
+    .meta .num {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      color: var(--accent);
+      text-transform: uppercase;
+    }
+    .meta h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .meta p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    /* ─── Concept A: The Implosion ─── */
+    .icosa {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+    .icosa svg {
+      width: 200px;
+      height: 200px;
+      overflow: visible;
+    }
+    .icosa polygon, .icosa line {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 1.3;
+      stroke-opacity: 0.7;
+      filter: drop-shadow(0 0 4px rgba(0, 229, 209, 0.4));
+    }
+    .shockwave {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+    }
+    .shockwave-ring {
+      width: 220px;
+      height: 220px;
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      opacity: 0;
+      box-shadow: 0 0 30px rgba(0,229,209,0.4);
+    }
+    .impl-shard {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      box-shadow: 0 0 6px var(--accent);
+      transform-origin: center;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    /* ─── Concept B: Type Shatter ─── */
+    .type-stage {
+      display: grid;
+      place-items: center;
+    }
+    .type-text {
+      position: relative;
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: #ffffff;
+      text-shadow:
+        0 0 30px rgba(0,229,209,0.25),
+        0 0 8px rgba(0,229,209,0.15);
+      opacity: 0;
+      will-change: opacity, transform;
+    }
+    .type-particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      opacity: 0;
+      box-shadow: 0 0 4px var(--accent);
+      will-change: transform, opacity;
+    }
+
+    /* ─── Concept C: Card Burst ─── */
+    .browser {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      aspect-ratio: 16 / 9.5;
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+      will-change: transform, opacity;
+    }
+    .browser-bar {
+      height: 28px;
+      background: #1a1a1d;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 10px;
+      border-bottom: 1px solid var(--line);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot.r { background: #ff5f56; }
+    .dot.y { background: #ffbd2e; }
+    .dot.g { background: #27c93f; }
+    .browser-body {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 14px;
+      height: calc(100% - 28px);
+    }
+    .b-side { display: flex; flex-direction: column; gap: 6px; }
+    .b-side > span:first-child { background: var(--accent); height: 5px; border-radius: 2px; }
+    .b-side > span:not(:first-child) { background: rgba(255,255,255,0.1); height: 5px; border-radius: 2px; }
+    .b-main { display: flex; flex-direction: column; gap: 10px; }
+    .b-head { background: rgba(0,229,209,0.13); height: 24px; border-radius: 3px; }
+    .b-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; flex: 1; }
+    .b-cards > div { background: rgba(255,255,255,0.04); border-radius: 4px; }
+
+    .burst-shard {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 14px;
+      height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--accent);
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+    .burst-ring {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 80px;
+      height: 80px;
+      transform: translate(-50%, -50%);
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      opacity: 0;
+      box-shadow: 0 0 30px rgba(0,229,209,0.5);
+    }
+
+    .badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      background: rgba(0,229,209,0.08);
+      border: 1px solid rgba(0,229,209,0.2);
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      border-top: 1px solid var(--line);
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Higgsfield concepts <span class="accent">·</span> live previews</h1>
+    <p>Click any stage to replay</p>
+  </header>
+
+  <main class="grid">
+
+    <!-- ─────── Concept A: THE IMPLOSION ─────── -->
+    <article class="card">
+      <div class="stage" data-concept="implosion" id="stage-A">
+        <span class="badge">CONCEPT A</span>
+
+        <div class="icosa">
+          <svg viewBox="-50 -50 100 100" id="icosa">
+            <polygon points="0,-40 38,-12 24,32 -24,32 -38,-12"/>
+            <polygon points="0,-20 19,-6 12,16 -12,16 -19,-6"/>
+            <line x1="0" y1="-40" x2="0" y2="32"/>
+            <line x1="-38" y1="-12" x2="38" y2="-12"/>
+            <line x1="-24" y1="32" x2="38" y2="-12"/>
+            <line x1="24" y1="32" x2="-38" y2="-12"/>
+          </svg>
+        </div>
+
+        <div class="shockwave"><div class="shockwave-ring" id="shock-A"></div></div>
+
+        <!-- 24 implosion shards -->
+        <script>
+          (function(){
+            const stage = document.currentScript.parentElement;
+            for (let i = 0; i < 24; i++) {
+              const s = document.createElement('span');
+              s.className = 'impl-shard';
+              stage.appendChild(s);
+            }
+          })();
+        </script>
+      </div>
+
+      <div class="meta">
+        <span class="num">01 · The Implosion</span>
+        <h2>Icosahedron shatters and re-forms</h2>
+        <p>The on-site hero geometry pulses, violently fans into ~120 cyan shards, then collapses back inward with a soft elastic overshoot. Shockwave ring crosses past camera at detonation. Loops seamlessly.</p>
+      </div>
+    </article>
+
+    <!-- ─────── Concept B: TYPE SHATTER ─────── -->
+    <article class="card">
+      <div class="stage type-stage" data-concept="type" id="stage-B">
+        <span class="badge">CONCEPT B</span>
+        <h3 class="type-text" id="type-text">PRATHAM SHARMA</h3>
+        <!-- particles injected by JS -->
+      </div>
+
+      <div class="meta">
+        <span class="num">02 · Type Shatter</span>
+        <h2>Particles assemble into the name, then disintegrate</h2>
+        <p>Thousands of tiny cyan particles converge magnetically into bold sans-serif "PRATHAM SHARMA", hold sharp, then fly outward and re-converge. Drops in as a hero texture replacing the static "PS" background.</p>
+      </div>
+    </article>
+
+    <!-- ─────── Concept C: CARD BURST ─────── -->
+    <article class="card">
+      <div class="stage" data-concept="burst" id="stage-C">
+        <span class="badge">CONCEPT C</span>
+
+        <div class="browser" id="browser-C">
+          <div class="browser-bar">
+            <span class="dot r"></span>
+            <span class="dot y"></span>
+            <span class="dot g"></span>
+          </div>
+          <div class="browser-body">
+            <div class="b-side">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="b-main">
+              <div class="b-head"></div>
+              <div class="b-cards">
+                <div></div><div></div><div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="burst-ring" id="ring-C"></div>
+
+        <!-- 10 burst shards (matches the on-site transition exactly) -->
+        <script>
+          (function(){
+            const stage = document.currentScript.parentElement;
+            for (let i = 0; i < 10; i++) {
+              const s = document.createElement('span');
+              s.className = 'burst-shard';
+              stage.appendChild(s);
+            }
+          })();
+        </script>
+      </div>
+
+      <div class="meta">
+        <span class="num">03 · Card Burst</span>
+        <h2>The on-site card transition, as a video</h2>
+        <p>The same implode-explode beat that fires when you click Next/Prev on Featured Work. The video and the in-product motion become the same gesture — perfect for social teasers since the user sees this exact beat when they visit.</p>
+      </div>
+    </article>
+
+  </main>
+
+  <footer>
+    Once Higgsfield renders the final MP4, drop it at <code style="color:var(--accent)">/hero-loop.mp4</code> and follow the integration section in <a href="https://github.com/pratham7711/portfolio/blob/main/docs/higgsfield-hero-video.md">docs/higgsfield-hero-video.md</a>.
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script>
+    /* ─────────────────────────────────────────
+       Concept A — IMPLOSION
+       Icosahedron shatters then re-forms. ~5s loop.
+    ───────────────────────────────────────── */
+    const stageA = document.getElementById('stage-A');
+    const icosaSvg = document.getElementById('icosa');
+    const shardsA = stageA.querySelectorAll('.impl-shard');
+    const shockA = document.getElementById('shock-A');
+    let timelineA;
+
+    function playImplosion() {
+      timelineA?.kill();
+      gsap.set(icosaSvg, { opacity: 1, scale: 1 });
+      gsap.set(shockA, { scale: 0.1, opacity: 0 });
+      gsap.set(shardsA, { x: 0, y: 0, opacity: 0, rotate: 0, scale: 1 });
+
+      timelineA = gsap.timeline({
+        defaults: { overwrite: 'auto' },
+        onComplete: () => setTimeout(playImplosion, 600),
+      });
+
+      // Slow orbit / breathe phase (0 → 1.8s)
+      timelineA.to(icosaSvg, { rotation: 60, duration: 1.8, ease: 'none' }, 0)
+               .to(icosaSvg, { scale: 1.04, duration: 0.18, ease: 'power2.in' }, 1.62)
+
+      // Detonation (1.8s)
+               .to(icosaSvg, { scale: 0.4, opacity: 0, duration: 0.45, ease: 'power3.in' }, 1.8)
+               .fromTo(shockA,
+                  { scale: 0.1, opacity: 0.6 },
+                  { scale: 4, opacity: 0, duration: 0.7, ease: 'power2.out' }, 1.8)
+               .fromTo(shardsA,
+                  { x: 0, y: 0, opacity: 1, scale: 1, rotate: 0 },
+                  {
+                    x: (i) => Math.cos((i / 24) * Math.PI * 2) * 280,
+                    y: (i) => Math.sin((i / 24) * Math.PI * 2) * 220,
+                    rotate: (i) => (i % 2 ? 200 : -200),
+                    scale: 0.4,
+                    opacity: 0,
+                    duration: 0.9,
+                    ease: 'power3.out',
+                    stagger: { each: 0.008, from: 'center' },
+                  }, 1.8)
+
+      // Re-form (2.6s)
+               .fromTo(shardsA,
+                  {
+                    x: (i) => Math.cos((i / 24) * Math.PI * 2) * 280,
+                    y: (i) => Math.sin((i / 24) * Math.PI * 2) * 220,
+                    opacity: 0,
+                  },
+                  { x: 0, y: 0, opacity: 0.8, duration: 0.5, ease: 'power2.in' }, 2.6)
+               .to(shardsA, { opacity: 0, duration: 0.2 }, 3.1)
+               .fromTo(icosaSvg,
+                  { scale: 0.2, opacity: 0 },
+                  { scale: 1.05, opacity: 1, duration: 0.55, ease: 'back.out(1.8)' }, 3.05)
+               .to(icosaSvg, { scale: 1, rotation: '+=40', duration: 1.2, ease: 'power1.inOut' }, 3.6)
+               ;
+    }
+    playImplosion();
+    stageA.addEventListener('click', playImplosion);
+
+
+    /* ─────────────────────────────────────────
+       Concept B — TYPE SHATTER
+       Particles → "PRATHAM SHARMA" → disintegrate. ~5s loop.
+    ───────────────────────────────────────── */
+    const stageB = document.getElementById('stage-B');
+    const typeText = document.getElementById('type-text');
+    const PARTICLE_COUNT = 80;
+    const particlesB = [];
+
+    // create particles
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const p = document.createElement('span');
+      p.className = 'type-particle';
+      stageB.appendChild(p);
+      particlesB.push(p);
+    }
+
+    let timelineB;
+
+    function playTypeShatter() {
+      timelineB?.kill();
+
+      const stageRect = stageB.getBoundingClientRect();
+      const cx = stageRect.width / 2;
+      const cy = stageRect.height / 2;
+
+      // Assign each particle a random "drift home" position around the text and an outer position
+      const drifts = particlesB.map(() => {
+        const angle = Math.random() * Math.PI * 2;
+        const homeRadius = Math.random() * (Math.min(cx, cy) * 0.9);
+        const outerRadius = Math.min(cx, cy) * 1.6;
+        return {
+          home: { x: Math.cos(angle) * homeRadius, y: Math.sin(angle) * homeRadius * 0.45 },
+          outer: { x: Math.cos(angle) * outerRadius, y: Math.sin(angle) * outerRadius * 0.6 },
+        };
+      });
+
+      gsap.set(typeText, { opacity: 0, scale: 0.95 });
+      particlesB.forEach((p, i) => {
+        gsap.set(p, {
+          x: cx + drifts[i].outer.x - 1.5,
+          y: cy + drifts[i].outer.y - 1.5,
+          opacity: 0,
+        });
+      });
+
+      timelineB = gsap.timeline({
+        defaults: { overwrite: 'auto' },
+        onComplete: () => setTimeout(playTypeShatter, 400),
+      });
+
+      // Particles drift in (0 → 1s)
+      particlesB.forEach((p, i) => {
+        timelineB.to(p, {
+          x: cx + drifts[i].home.x - 1.5,
+          y: cy + drifts[i].home.y - 1.5,
+          opacity: 0.7,
+          duration: 1.0,
+          ease: 'power2.inOut',
+        }, 0);
+      });
+
+      // Particles converge to center (1.0 → 1.5s)
+      particlesB.forEach((p) => {
+        timelineB.to(p, {
+          x: cx - 1.5,
+          y: cy - 1.5,
+          opacity: 1,
+          duration: 0.5,
+          ease: 'power3.in',
+        }, 1.0);
+      });
+
+      // Text materializes (1.5s)
+      timelineB.to(particlesB, { opacity: 0, duration: 0.2 }, 1.5)
+               .fromTo(typeText,
+                  { opacity: 0, scale: 0.9 },
+                  { opacity: 1, scale: 1, duration: 0.5, ease: 'back.out(2)' }, 1.5)
+
+      // Hold (1.5 → 3.0s)
+               .to(typeText, { duration: 1.5 }, 1.5)
+
+      // Disintegrate (3.0 → 3.7s)
+               .to(typeText, { opacity: 0, scale: 1.05, duration: 0.5, ease: 'power2.in' }, 3.0)
+               ;
+
+      particlesB.forEach((p, i) => {
+        timelineB.fromTo(p,
+          { x: cx - 1.5, y: cy - 1.5, opacity: 1 },
+          {
+            x: cx + drifts[i].outer.x - 1.5,
+            y: cy + drifts[i].outer.y - 1.5,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'power3.out',
+          }, 3.0);
+      });
+    }
+    // Wait until layout settles
+    requestAnimationFrame(() => requestAnimationFrame(playTypeShatter));
+    stageB.addEventListener('click', playTypeShatter);
+
+
+    /* ─────────────────────────────────────────
+       Concept C — CARD BURST
+       Identical to the on-site Featured Project transition.
+    ───────────────────────────────────────── */
+    const stageC = document.getElementById('stage-C');
+    const browserC = document.getElementById('browser-C');
+    const ringC = document.getElementById('ring-C');
+    const shardsC = stageC.querySelectorAll('.burst-shard');
+    const SHARD_COUNT_C = 10;
+    let timelineC;
+
+    function playCardBurst() {
+      timelineC?.kill();
+      gsap.set(browserC, { opacity: 1, scale: 1, rotation: 0 });
+      gsap.set(ringC, { scale: 0.1, opacity: 0 });
+      gsap.set(shardsC, { x: 0, y: 0, opacity: 0, rotate: 0, scale: 1 });
+
+      timelineC = gsap.timeline({
+        defaults: { overwrite: 'auto' },
+        onComplete: () => setTimeout(playCardBurst, 1400),
+      });
+
+      // hold (0 → 1.2s)
+      timelineC.to({}, { duration: 1.2 })
+
+      // implode (1.2 → 1.42s)
+               .to(browserC, {
+                 scale: 0.92, rotation: -1.5, opacity: 0,
+                 duration: 0.22, ease: 'power3.in',
+               }, 1.2)
+
+      // shards burst (1.22 → 1.77s)
+               .fromTo(shardsC,
+                  { x: 0, y: 0, opacity: 1, scale: 1, rotate: 0 },
+                  {
+                    x: (i) => Math.cos((i / SHARD_COUNT_C) * Math.PI * 2) * 200,
+                    y: (i) => Math.sin((i / SHARD_COUNT_C) * Math.PI * 2) * 140,
+                    rotate: (i) => (i % 2 ? 140 : -140),
+                    scale: 0.35,
+                    opacity: 0,
+                    duration: 0.55,
+                    ease: 'power3.out',
+                    stagger: { each: 0.012, from: 'center' },
+                  }, 1.22)
+
+      // shockwave (1.2 → 1.7s)
+               .fromTo(ringC,
+                  { scale: 0.1, opacity: 0.55 },
+                  { scale: 3.5, opacity: 0, duration: 0.5, ease: 'power2.out' }, 1.2)
+
+      // rematerialize (1.48 → 1.9s)
+               .fromTo(browserC,
+                  { scale: 0.94, rotation: 1.5, opacity: 0 },
+                  { scale: 1, rotation: 0, opacity: 1, duration: 0.42, ease: 'back.out(1.4)' }, 1.48)
+               ;
+    }
+    playCardBurst();
+    stageC.addEventListener('click', playCardBurst);
+  </script>
+</body>
+</html>

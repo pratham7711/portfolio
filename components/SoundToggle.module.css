@@ -1,0 +1,46 @@
+.toggle {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+  padding: 2px;
+  opacity: 0.7;
+  transition: opacity 0.25s;
+}
+
+.toggle:hover {
+  opacity: 1;
+}
+
+.bar {
+  width: 3px;
+  height: 6px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: height 0.3s;
+}
+
+.bar:nth-child(2) {
+  height: 12px;
+}
+
+.bar.live {
+  animation: eq 0.9s ease-in-out infinite alternate;
+}
+
+.bar.live:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.bar.live:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes eq {
+  from {
+    height: 5px;
+  }
+  to {
+    height: 15px;
+  }
+}

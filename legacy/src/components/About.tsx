@@ -1,0 +1,114 @@
+import { useRef, useEffect } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import styles from './About.module.css'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const stats = [
+  { value: '3+', label: 'YEARS EXPERIENCE' },
+  { value: '4', label: 'COMPANIES' },
+  { value: 'Knight', label: 'LEETCODE RANK' },
+  { value: '9/10', label: 'GPA' },
+]
+
+export const About = () => {
+  const sectionRef = useRef<HTMLElement>(null)
+  const headingRef = useRef<HTMLHeadingElement>(null)
+  const textRef = useRef<HTMLParagraphElement>(null)
+  const statsRef = useRef<HTMLDivElement>(null)
+  const statItemsRef = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        headingRef.current,
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: headingRef.current,
+            start: 'top 80%',
+            once: true,
+          },
+        }
+      )
+
+      gsap.fromTo(
+        textRef.current,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: textRef.current,
+            start: 'top 80%',
+            once: true,
+          },
+        }
+      )
+
+      statItemsRef.current.forEach((item, index) => {
+        if (item) {
+          gsap.fromTo(
+            item,
+            { y: 60, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              delay: index * 0.15,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: statsRef.current,
+                start: 'top 80%',
+                once: true,
+              },
+            }
+          )
+        }
+      })
+    }, sectionRef)
+
+    return () => ctx.revert()
+  }, [])
+
+  return (
+    <section ref={sectionRef} id="about" className={styles.about}>
+      <div className={styles.container}>
+        <h2 ref={headingRef} className={styles.heading}>
+          THE STORY
+        </h2>
+
+        <p ref={textRef} className={styles.text}>
+          Full Stack Engineer with 3+ years building products at scale: real-time eSigning
+          platforms, AI document workflows, and CUDA-backed voice agents. Currently at Leegality,
+          shipping the future of digital agreements. Exploring where great UI meets working AI.
+        </p>
+      </div>
+
+      {/* Stats Row */}
+      <div className={styles.container}>
+        <div ref={statsRef} className={styles.stats}>
+          {stats.map((stat, index) => (
+            <div
+              key={stat.label}
+              ref={(el) => { statItemsRef.current[index] = el }}
+              className={styles.statItem}
+            >
+              <span className={styles.statValue}>{stat.value}</span>
+              <span className={styles.statLabel}>{stat.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+export default About

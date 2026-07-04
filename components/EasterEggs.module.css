@@ -1,0 +1,87 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  background: rgba(10, 10, 15, 0.88);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  animation: fadeIn 0.3s var(--ease-out);
+}
+
+.chess {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 0 6vw;
+}
+
+.chessTitle {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+  color: var(--accent);
+}
+
+.moves {
+  font-family: var(--font-mono);
+  font-size: clamp(1.1rem, 3vw, 1.8rem);
+  color: var(--mind-text);
+  max-width: 700px;
+  line-height: 1.8;
+}
+
+.move {
+  animation: fadeIn 0.3s var(--ease-out);
+}
+
+.chessSub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--mind-dim);
+  font-size: 1.1rem;
+}
+
+.cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.confetti {
+  position: absolute;
+  top: -20px;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  animation: drop 1.8s ease-in forwards;
+}
+
+.cubeText {
+  font-family: var(--font-mono);
+  font-size: clamp(1rem, 3vw, 1.6rem);
+  letter-spacing: 0.4em;
+  color: var(--mind-text);
+}
+
+@keyframes drop {
+  to {
+    transform: translateY(105vh) rotate(540deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

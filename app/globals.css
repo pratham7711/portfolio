@@ -1,0 +1,124 @@
+:root {
+  /* Act I — The Mind */
+  --mind-bg: #0a0a0f;
+  --mind-bg-2: #101018;
+  --mind-text: #f5f5f7;
+  --mind-dim: #8b8b96;
+  --accent: #00e5d1;
+  --accent-dim: rgba(0, 229, 209, 0.35);
+
+  /* Act II — The Body (editorial) */
+  --paper: #f4f1ea;
+  --paper-2: #ebe6da;
+  --ink: #141311;
+  --ink-dim: #6b675e;
+
+  /* Act III — Match Point (fusion) */
+  --match-bg: #0d0f14;
+  --amber: #f5a623;
+  --amber-dim: rgba(245, 166, 35, 0.35);
+
+  --font-sans: var(--font-grotesk), 'Space Grotesk', system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), 'Fraunces', Georgia, serif;
+  --font-mono: var(--font-mono-var), 'JetBrains Mono', monospace;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --nav-h: 72px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+body {
+  background: var(--mind-bg);
+  color: var(--mind-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--mind-bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+.skip-link {
+  position: fixed;
+  top: -48px;
+  left: 16px;
+  z-index: 200;
+  padding: 10px 18px;
+  background: var(--accent);
+  color: var(--mind-bg);
+  font-weight: 600;
+  border-radius: 4px;
+  transition: top 0.2s var(--ease-out);
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* Shared section heading treatment */
+.act-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

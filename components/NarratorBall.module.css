@@ -1,0 +1,17 @@
+.wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 220px;
+  height: 220px;
+  z-index: 60;
+  pointer-events: none;
+  will-change: transform;
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    width: 130px;
+    height: 130px;
+  }
+}

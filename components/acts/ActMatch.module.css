@@ -1,0 +1,258 @@
+.act {
+  background: var(--match-bg);
+  color: var(--mind-text);
+}
+
+.setLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.4em;
+  color: var(--amber);
+}
+
+/* ---------- PROJECT RAIL ---------- */
+.wrap {
+  overflow: hidden;
+}
+
+.rail {
+  display: flex;
+  align-items: center;
+  gap: 4vw;
+  padding: 10vh 6vw;
+  width: max-content;
+  min-height: 100svh;
+}
+
+.intro {
+  min-width: 32vw;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.introTitle {
+  font-size: clamp(3rem, 8vw, 7rem);
+  background: linear-gradient(100deg, var(--accent), var(--amber));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.introHint {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: var(--mind-dim);
+}
+
+.card {
+  width: min(520px, 78vw);
+  min-height: 62vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 44px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background:
+    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--proj) 12%, transparent), transparent 55%),
+    linear-gradient(160deg, #12141b, #0d0f14);
+  transition: border-color 0.3s, transform 0.3s var(--ease-out);
+}
+
+.card:hover {
+  border-color: color-mix(in srgb, var(--proj) 55%, transparent);
+  transform: translateY(-6px);
+}
+
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.cardNum {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--proj);
+}
+
+.cardPlay {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  color: var(--mind-dim);
+}
+
+.cardName {
+  font-size: clamp(1.9rem, 4vw, 3rem);
+}
+
+.cardDesc {
+  color: var(--mind-dim);
+  line-height: 1.6;
+  font-size: 0.98rem;
+}
+
+.cardTags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.cardTags li {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.06em;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--mind-dim);
+}
+
+.cardLinks {
+  display: flex;
+  gap: 22px;
+  padding-top: 10px;
+}
+
+.cardLink {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--proj);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.25s;
+}
+
+.cardLink:hover {
+  border-color: var(--proj);
+}
+
+/* ---------- CTA ---------- */
+.cta {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 34px;
+  padding: 16vh 6vw 6vh;
+  position: relative;
+}
+
+.ctaKicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.5em;
+  color: var(--mind-dim);
+}
+
+.ctaTitle {
+  font-size: clamp(3rem, 11vw, 9rem);
+  line-height: 0.95;
+  display: flex;
+  flex-direction: column;
+}
+
+.ctaLine {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+}
+
+.ctaWord {
+  display: inline-block;
+  will-change: transform;
+}
+
+.ctaAccent {
+  background: linear-gradient(100deg, var(--accent), var(--amber));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.ctaAvail {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: var(--mind-dim);
+}
+
+.availDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 12px #34d399;
+  animation: availPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes availPulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.ctaActions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.ctaPrimary {
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  letter-spacing: 0.12em;
+  padding: 18px 38px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: var(--accent);
+  transition: background 0.3s, color 0.3s, box-shadow 0.3s, transform 0.18s ease-out;
+  will-change: transform;
+}
+
+.ctaPrimary:hover {
+  background: var(--accent);
+  color: var(--match-bg);
+  box-shadow: 0 0 60px var(--accent-dim);
+}
+
+.ctaSocial {
+  display: flex;
+  gap: 28px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+}
+
+.ctaSocial a {
+  color: var(--mind-dim);
+  transition: color 0.25s;
+}
+
+.ctaSocial a:hover {
+  color: var(--amber);
+}
+
+.footer {
+  position: absolute;
+  bottom: 26px;
+  left: 6vw;
+  right: 6vw;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--mind-dim);
+}

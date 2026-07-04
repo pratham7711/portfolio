@@ -1,38 +1,6 @@
-# Dependencies
-node_modules/
-.pnp
-.pnp.js
-
-# Build output
-dist/
-build/
-.next/
-out/
-
-# Environment variables - NEVER COMMIT
-.env
-.env.*
-!.env.example
-!.env.local.example
-
-# Logs
-logs/
+node_modules
+.next
+/tmp
+dist
+.vercel
 *.log
-npm-debug.log*
-
-# Editor
-.vscode/
-.idea/
-*.swp
-*.swo
-.DS_Store
-
-# Cache
-.cache/
-.parcel-cache/
-.eslintcache
-*.tsbuildinfo
-
-
-# Claude Code local config
-.claude/
