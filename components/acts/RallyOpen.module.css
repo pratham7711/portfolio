@@ -1,0 +1,146 @@
+.opener {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+  background: #000;
+}
+
+.intro {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  pointer-events: none;
+}
+
+.introName {
+  font-size: clamp(2.6rem, 8vw, 7rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--mind-text);
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  padding: 0 5vw;
+}
+
+.introRole {
+  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.88);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.8);
+  text-align: center;
+  max-width: 46ch;
+  padding: 0 6vw;
+  line-height: 1.5;
+}
+
+.introHint {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
+  animation: pulse 2s ease-in-out infinite;
+  margin-top: 10px;
+}
+
+.introSkip {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 3px;
+  pointer-events: auto;
+  transition: color 0.25s, border-color 0.25s;
+}
+
+.introSkip:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.beat {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.55) 26%,
+      rgba(0, 0, 0, 0.12) 55%,
+      rgba(0, 0, 0, 0.35) 100%
+    ),
+    radial-gradient(90% 70% at 18% 88%, rgba(0, 0, 0, 0.55), transparent 65%);
+}
+
+.copy {
+  position: absolute;
+  left: 6vw;
+  right: 6vw;
+  bottom: 9vh;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: #fff;
+}
+
+.pitchA {
+  font-size: clamp(2rem, 6.5vw, 5rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+  opacity: 0;
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.7),
+    0 4px 32px rgba(0, 0, 0, 0.75);
+}
+
+.pitchB {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.3rem, 3vw, 2.2rem);
+  color: var(--accent);
+  opacity: 0;
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.75),
+    0 3px 24px rgba(0, 0, 0, 0.8);
+}
+
+.proof {
+  font-family: var(--font-mono);
+  font-size: clamp(0.68rem, 1.1vw, 0.8rem);
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.82);
+  opacity: 0;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85);
+  border-left: 2px solid var(--amber);
+  padding-left: 12px;
+  margin-top: 6px;
+}

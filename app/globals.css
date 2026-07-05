@@ -3,15 +3,16 @@
   --mind-bg: #0a0a0f;
   --mind-bg-2: #101018;
   --mind-text: #f5f5f7;
-  --mind-dim: #8b8b96;
+  --mind-dim: #a6a6b1;
   --accent: #00e5d1;
   --accent-dim: rgba(0, 229, 209, 0.35);
 
   /* Act II — The Body (editorial) */
   --paper: #f4f1ea;
-  --paper-2: #ebe6da;
+  --paper-2: #e7e1d3;
+  --paper-card: #fdfbf6;
   --ink: #141311;
-  --ink-dim: #6b675e;
+  --ink-dim: #565248;
 
   /* Act III — Match Point (fusion) */
   --match-bg: #0d0f14;
@@ -88,6 +89,12 @@ button {
   top: 12px;
 }
 
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
 /* Shared section heading treatment */
 .act-label {
   font-family: var(--font-mono);
@@ -111,6 +118,27 @@ h3 {
   height: 1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
+}
+
+@keyframes grainShift {
+  0% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(-40px, 25px);
+  }
+  66% {
+    transform: translate(30px, -35px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+.has-custom-cursor,
+.has-custom-cursor a,
+.has-custom-cursor button {
+  cursor: none;
 }
 
 @media (prefers-reduced-motion: reduce) {

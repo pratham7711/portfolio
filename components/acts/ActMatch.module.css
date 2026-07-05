@@ -95,6 +95,29 @@
   font-size: 0.98rem;
 }
 
+.cardMedia {
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #0a0c11;
+}
+
+.cardMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: saturate(0.92);
+  transform: scale(1.04);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.card:hover .cardMedia img {
+  transform: scale(1);
+}
+
 .cardTags {
   list-style: none;
   display: flex;
@@ -171,10 +194,19 @@
 }
 
 .ctaAccent {
-  background: linear-gradient(100deg, var(--accent), var(--amber));
+  background-image: linear-gradient(100deg, var(--accent), var(--amber));
+  background-size: 230% 100%;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.ctaAccentA {
+  background-position: 0% 0;
+}
+
+.ctaAccentB {
+  background-position: 100% 0;
 }
 
 .ctaAvail {
@@ -189,8 +221,8 @@
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #34d399;
-  box-shadow: 0 0 12px #34d399;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent-dim);
   animation: availPulse 1.6s ease-in-out infinite;
 }
 
@@ -255,4 +287,33 @@
   font-size: 0.6rem;
   letter-spacing: 0.2em;
   color: var(--mind-dim);
+}
+
+@media (max-width: 700px) {
+  .rail {
+    gap: 6vw;
+    padding: 9vh 6vw;
+  }
+  .intro {
+    min-width: 78vw;
+  }
+  .card {
+    width: min(460px, 84vw);
+    min-height: auto;
+    padding: 26px;
+  }
+  .cta {
+    gap: 26px;
+  }
+  .ctaPrimary {
+    font-size: 0.82rem;
+    padding: 15px 22px;
+    max-width: 92vw;
+    overflow-wrap: anywhere;
+  }
+  .ctaSocial {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
+  }
 }

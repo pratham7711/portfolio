@@ -82,7 +82,7 @@
   background: var(--paper-2);
 }
 
-.videoLayer {
+.beat {
   position: absolute;
   inset: 0;
   opacity: 0;
@@ -95,27 +95,45 @@
   object-fit: cover;
 }
 
-.cineCaption {
+.beatCaption {
   position: absolute;
-  bottom: 28px;
-  left: 32px;
-  right: 32px;
+  bottom: 40px;
+  left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
   color: #fff;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.3em;
   opacity: 0;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
+  will-change: transform, opacity;
 }
 
-.cineCaption span {
+.beatTouch {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.45em;
   color: var(--amber);
+}
+
+.beatPosition {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.beatLine {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+  opacity: 0.85;
 }
 
 /* ---------- HOBBY RALLY ---------- */
 .hobbyWrap {
   overflow: hidden;
   background: var(--paper-2);
+  color: var(--ink);
 }
 
 .hobbyRail {
@@ -147,16 +165,17 @@
   flex-direction: column;
   gap: 14px;
   padding: 44px;
-  background: var(--paper);
-  border: 1px solid rgba(20, 19, 17, 0.14);
+  background: var(--paper-card);
+  border: 1px solid rgba(20, 19, 17, 0.22);
   border-radius: 4px;
   position: relative;
+  box-shadow: 0 12px 32px rgba(20, 19, 17, 0.1);
   transition: transform 0.35s var(--ease-out), box-shadow 0.35s;
 }
 
 .hobbyCard:hover {
   transform: translateY(-8px) rotate(-0.5deg);
-  box-shadow: 0 24px 48px rgba(20, 19, 17, 0.14);
+  box-shadow: 0 28px 56px rgba(20, 19, 17, 0.18);
 }
 
 .hobbyIndex {
@@ -168,6 +187,7 @@
 
 .hobbyName {
   font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  color: var(--ink);
 }
 
 .hobbyMeta {
@@ -181,6 +201,21 @@
   font-size: 1.05rem;
   margin-top: auto;
   color: var(--ink);
+}
+
+@media (max-width: 700px) {
+  .hobbyIntro {
+    min-width: 72vw;
+  }
+  .hobbyCard {
+    width: min(400px, 82vw);
+    padding: 30px;
+    min-height: 40vh;
+  }
+  .hobbyRail {
+    gap: 7vw;
+    padding: 9vh 6vw;
+  }
 }
 
 @media (max-width: 900px) {

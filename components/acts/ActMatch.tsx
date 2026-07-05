@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { PROJECTS, SITE } from '@/lib/data'
+import { PROJECTS } from '@/lib/data'
 import styles from './ActMatch.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -17,7 +17,6 @@ export default function ActMatch() {
   const sectionRef = useRef<HTMLElement>(null)
   const wrapRef = useRef<HTMLDivElement>(null)
   const railRef = useRef<HTMLDivElement>(null)
-  const ctaRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -39,33 +38,18 @@ export default function ActMatch() {
         })
       }
 
-      // CTA letters slam in
-      const cta = ctaRef.current
-      if (cta) {
-        gsap.fromTo(
-          `.${styles.ctaWord}`,
-          { yPercent: 120 },
-          {
-            yPercent: 0,
-            stagger: 0.08,
-            duration: 0.9,
-            ease: 'power4.out',
-            scrollTrigger: { trigger: cta, start: 'top 70%' },
-          }
-        )
-      }
     }, sectionRef)
 
     return () => ctx.revert()
   }, [])
 
   return (
-    <section id="act-match" ref={sectionRef} className={styles.act}>
+    <section id="projects" ref={sectionRef} className={styles.act}>
       {/* PROJECTS — horizontal highlight reel */}
       <div ref={wrapRef} className={styles.wrap}>
         <div ref={railRef} className={styles.rail}>
           <div className={styles.intro}>
-            <p className={styles.setLabel}>SET 3 — MATCH POINT</p>
+            <p className={styles.setLabel}>THE WORK — PROJECTS</p>
             <h2 className={styles.introTitle}>
               HIGHLIGHT
               <br />
@@ -86,6 +70,11 @@ export default function ActMatch() {
               </header>
               <h3 className={styles.cardName}>{p.name}</h3>
               <p className={styles.cardDesc}>{p.description}</p>
+              {p.image && (
+                <div className={styles.cardMedia}>
+                  <img src={p.image} alt={`${p.name} screenshot`} loading="lazy" />
+                </div>
+              )}
               <ul className={styles.cardTags}>
                 {p.tags.map((t) => (
                   <li key={t}>{t}</li>
@@ -108,56 +97,6 @@ export default function ActMatch() {
         </div>
       </div>
 
-      {/* MATCH POINT CTA */}
-      <div id="contact" ref={ctaRef} className={styles.cta}>
-        <p className={styles.ctaKicker}>GAME POINT — YOUR MOVE</p>
-        <h2 className={styles.ctaTitle} aria-label="Match point. Your serve.">
-          <span className={styles.ctaLine}>
-            <span className={styles.ctaWord}>MATCH</span>{' '}
-            <span className={styles.ctaWord}>POINT.</span>
-          </span>
-          <span className={styles.ctaLine}>
-            <span className={`${styles.ctaWord} ${styles.ctaAccent}`}>YOUR</span>{' '}
-            <span className={`${styles.ctaWord} ${styles.ctaAccent}`}>SERVE.</span>
-          </span>
-        </h2>
-        <p className={styles.ctaAvail}>
-          <span className={styles.availDot} /> Open to conversations — freelance,
-          full-time, or just volleyball.
-        </p>
-        <div className={styles.ctaActions}>
-          <a
-            href={`mailto:${SITE.email}`}
-            className={styles.ctaPrimary}
-            onMouseMove={(e) => {
-              const el = e.currentTarget
-              const r = el.getBoundingClientRect()
-              const x = e.clientX - r.left - r.width / 2
-              const y = e.clientY - r.top - r.height / 2
-              el.style.transform = `translate(${x * 0.18}px, ${y * 0.28}px)`
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = ''
-            }}
-          >
-            {SITE.email}
-          </a>
-          <div className={styles.ctaSocial}>
-            <a href={SITE.github} target="_blank" rel="noreferrer">
-              GITHUB ↗
-            </a>
-            <a href={SITE.linkedin} target="_blank" rel="noreferrer">
-              LINKEDIN ↗
-            </a>
-          </div>
-        </div>
-        <footer className={styles.footer}>
-          <span>© {new Date().getFullYear()} PRATHAM SHARMA</span>
-          <span className={styles.footerNote}>
-            BUILT IN THREE ACTS · NEXT.JS · GSAP · R3F · HIGGSFIELD
-          </span>
-        </footer>
-      </div>
     </section>
   )
 }

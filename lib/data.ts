@@ -1,38 +1,60 @@
 export const SITE = {
   name: 'PRATHAM SHARMA',
   titles: ['Full Stack Engineer', 'AI Engineer', 'Frontend Expert'],
+  positioning:
+    'Full-stack + AI engineer. I take web products from idea to production.',
   email: 'prathamsharma7711@gmail.com',
   github: 'https://github.com/pratham7711',
-  linkedin: 'https://www.linkedin.com/in/pratham-sharma-a7a97a201',
+  linkedin: 'https://www.linkedin.com/in/pratham-sharma-a555b8207',
+  resume: '/Pratham_Sharma_Resume.pdf',
   tagline: 'I build systems. I set plays.',
 }
+
+export const MAILTO = `mailto:${SITE.email}?subject=${encodeURIComponent(
+  "Let's work together — via prathamsharma.in"
+)}&body=${encodeURIComponent(
+  `Hi Pratham,
+
+Found you through your portfolio.
+
+What I'm building / hiring for:
+-
+
+Timeline:
+-
+
+When are you free for a quick call?
+
+Best,
+`
+)}`
 
 export const EXPERIENCE = [
   {
     company: 'REALTOS',
     role: 'Software Engineer',
-    period: '2022 — 2023',
-    play: 'THE SERVE',
+    period: '2023',
+    play: 'SEASON 01 — THE DIG',
     summary:
-      'First touch. Built real-estate tokenization flows and learned to ship fast in a small team.',
-    stack: ['React', 'Node.js', 'PostgreSQL'],
+      'Built the entire PropTech platform frontend from scratch — production in 12 weeks, 500+ initial users, 99.99% uptime on AWS.',
+    stack: ['React', 'TypeScript', 'AWS'],
   },
   {
     company: 'SALESCODE.AI',
     role: 'Software Engineer',
-    period: '2023 — 2024',
-    play: 'THE PASS',
+    period: '2023 — 2025',
+    play: 'SEASON 02 — THE SET',
     summary:
-      'Controlled the chaos. Enterprise-scale AI sales platforms serving global FMCG giants — performance, data pipelines, dashboards.',
-    stack: ['React', 'TypeScript', 'GraphQL', 'AWS'],
+      'Cut a 6–9 hour enterprise data pipeline to under 5 minutes (−99%). Kafka event pipelines: +40% throughput, −25% latency, serving global FMCG giants.',
+    stack: ['React', 'TypeScript', 'Java', 'Kafka', 'AWS'],
   },
   {
     company: 'LEEGALITY',
     role: 'Software Engineer — Frontend',
-    period: '2024 — NOW',
-    play: 'THE SET',
+    period: '2025 — NOW',
+    play: 'SEASON 03 — THE SPIKE',
     summary:
-      "Setting up every spike. Building India's leading document-infrastructure platform — eSign flows, design systems, AI features used by 2000+ businesses.",
+      'Shipped an 18-component design system (+30% team velocity), an AI Chatbot SDK that cut support escalations 60%, and AI document review used by 2,000+ businesses.',
     stack: ['React', 'TypeScript', 'Next.js', 'Design Systems', 'AI'],
   },
 ]
@@ -44,16 +66,34 @@ export const SKILL_GROUPS = [
   },
   {
     label: 'Backend',
-    skills: ['Node.js', 'FastAPI', 'PostgreSQL', 'Redis', 'GraphQL'],
+    skills: ['Node.js', 'FastAPI', 'PostgreSQL', 'Redis', 'GraphQL', 'Kafka'],
   },
   {
     label: 'AI / ML',
     skills: ['LangChain', 'RAG', 'Pinecone', 'Gemini', 'OpenAI', 'Embeddings'],
   },
   {
+    label: 'AI Tooling',
+    skills: [
+      'Claude Code',
+      'Codex',
+      'Cursor',
+      'Cline',
+      'Agentic Workflows',
+      'Prompt Engineering',
+    ],
+  },
+  {
     label: 'Infra',
     skills: ['AWS', 'Vercel', 'Railway', 'Docker', 'CI/CD'],
   },
+]
+
+export const STATS = [
+  { n: 99, prefix: '', suffix: '%', label: 'PIPELINE TIME CUT' },
+  { n: 90, prefix: '', suffix: '+', label: 'LIGHTHOUSE SCORES' },
+  { n: 355, prefix: '#', suffix: '', label: 'LEETCODE GLOBAL RANK' },
+  { n: 2000, prefix: '', suffix: '+', label: 'BUSINESSES USE MY AI FEATURES' },
 ]
 
 export interface Project {
@@ -67,38 +107,68 @@ export interface Project {
   liveUrl?: string
   featured?: boolean
   accent: string
+  image?: string
 }
 
 export const PROJECTS: Project[] = [
   {
-    slug: 'docmind-ai',
+    slug: 'megakernel-tts',
+    image: '/media/projects/megakernel-tts.png',
     number: '01',
+    name: 'MEGAKERNEL TTS',
+    playCall: 'KILL SHOT',
+    description:
+      'Adapted a 1,200-line persistent CUDA megakernel as the decode backend for Qwen3-TTS — ~25ms time-to-first-chunk (RTF 0.12) on an RTX 5090, streamed end-to-end via Pipecat.',
+    tags: ['CUDA', 'PyTorch', 'Qwen3-TTS', 'Pipecat', 'Groq'],
+    link: 'https://github.com/pratham7711/e3-megakernel-tts-takehome',
+    featured: true,
+    accent: '#f5a623',
+  },
+  {
+    slug: 'docmind-ai',
+    image: '/media/projects/docmind-ai.png',
+    number: '02',
     name: 'DOCMIND AI',
     playCall: 'QUICK SET — A1',
     description:
-      'AI document intelligence: upload PDFs, ask questions, get cited answers via RAG. FastAPI, LangChain, Pinecone, Gemini Flash streaming, Supabase.',
+      'AI document intelligence: upload PDFs, ask questions, get cited answers in under 2 seconds via RAG. FastAPI, LangChain, Pinecone, Gemini Flash streaming.',
     tags: ['Next.js', 'FastAPI', 'LangChain', 'Pinecone', 'RAG', 'Gemini'],
-    liveUrl: 'https://frontend-mu-five-51.vercel.app',
+    liveUrl: 'https://docmind-ai-six.vercel.app',
     link: 'https://github.com/pratham7711/docmind-ai',
     featured: true,
-    accent: '#a78bfa',
+    accent: '#00e5d1',
   },
   {
     slug: 'collabboard',
-    number: '02',
+    image: '/media/projects/collabboard.png',
+    number: '03',
     name: 'COLLABBOARD',
     playCall: 'DOUBLE QUICK',
     description:
-      'Real-time collaborative whiteboard — WebSocket multi-cursor, drawing tools, sticky notes, live presence.',
+      'Real-time collaborative whiteboard — 10+ concurrent users at sub-100ms sync. WebSocket multi-cursor, drawing tools, sticky notes, Redis-backed presence.',
     tags: ['React', 'WebSockets', 'Canvas API', 'Node.js', 'Redis'],
-    liveUrl: 'https://collabboard-phi.vercel.app',
     link: 'https://github.com/pratham7711/collabboard',
     featured: true,
-    accent: '#34d399',
+    accent: '#f5a623',
+  },
+  {
+    slug: 'pratham-ui',
+    image: '/media/projects/pratham-ui.png',
+    number: '04',
+    name: '@PRATHAM7711/UI',
+    playCall: 'SETTER DUMP',
+    description:
+      '18-component React library on npm — dark-first theming, Storybook docs, tree-shaking. 200+ weekly downloads, adopted by external projects.',
+    tags: ['React', 'TypeScript', 'ShadCN', 'Storybook', 'npm'],
+    liveUrl: 'https://www.npmjs.com/package/@pratham7711/ui',
+    link: 'https://github.com/pratham7711',
+    featured: true,
+    accent: '#00e5d1',
   },
   {
     slug: 'shopwave',
-    number: '03',
+    image: '/media/projects/shopwave.png',
+    number: '05',
     name: 'SHOPWAVE',
     playCall: 'BACK-ROW ATTACK',
     description:
@@ -106,43 +176,20 @@ export const PROJECTS: Project[] = [
     tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Stripe', 'Prisma'],
     liveUrl: 'https://shopwave-green.vercel.app',
     link: 'https://github.com/pratham7711/shopwave',
-    featured: true,
-    accent: '#f59e0b',
+    accent: '#f5a623',
   },
   {
     slug: 'devpulse',
-    number: '04',
+    image: '/media/projects/devpulse.png',
+    number: '06',
     name: 'DEVPULSE',
     playCall: 'PIPE ATTACK',
     description:
       'Developer activity dashboard — GitHub contributions, LeetCode stats, commit heatmaps in one embeddable card.',
     tags: ['React', 'GraphQL', 'GitHub API', 'Chart.js'],
-    liveUrl: 'https://devpulse-git-main-prathams-projects-371c8ade.vercel.app',
+    liveUrl: 'https://devpulse-dusky.vercel.app',
     link: 'https://github.com/pratham7711/devpulse',
-    featured: true,
-    accent: '#60a5fa',
-  },
-  {
-    slug: 'cinemate',
-    number: '05',
-    name: 'CINEMATE',
-    playCall: 'CROSS-COURT SHOT',
-    description:
-      'Netflix-style streaming platform — JWT auth, movie discovery, personalized recommendations, TMDB.',
-    tags: ['React', 'Express', 'MongoDB', 'JWT', 'TMDB'],
-    link: 'https://github.com/pratham7711/CineMate',
-    accent: '#f43f5e',
-  },
-  {
-    slug: 'cryptoexchange',
-    number: '06',
-    name: 'CRYPTOEXCHANGE',
-    playCall: 'LINE SHOT',
-    description:
-      'Real-time crypto dashboard — live price tracking, historical charts, portfolio management via CoinGecko.',
-    tags: ['React', 'CoinGecko API', 'Charts'],
-    link: 'https://github.com/pratham7711/cryptoexchange',
-    accent: '#22d3ee',
+    accent: '#00e5d1',
   },
 ]
 
@@ -173,10 +220,46 @@ export const HOBBIES = [
   },
 ]
 
-/** Higgsfield-generated media assets (populated during build) */
+/** Higgsfield-generated media assets */
 export const MEDIA = {
-  editorialStill: '/media/editorial-set.png',
-  volleyballVideo: '/media/volleyball-cinematic.mp4',
-  engineerStill: '/media/engineer-portrait.png',
-  matchPointVideo: '/media/matchpoint-loop.mp4',
+  editorialStill: '/media/rally-set.png',
+}
+
+/** The rally — one possession, three touches, three pitches. */
+export const RALLY = [
+  {
+    id: 'dig',
+    touch: 'FIRST TOUCH',
+    position: 'LIBERO',
+    pitchA: 'Want the careful first touch?',
+    pitchB: "I'm the right choice.",
+    proof: 'Realtos — solo-built a PropTech platform to production in 12 weeks.',
+    still: '/media/rally-dig.png',
+    video: '/media/rally-dig.mp4',
+  },
+  {
+    id: 'set',
+    touch: 'SECOND TOUCH',
+    position: 'SETTER',
+    pitchA: 'Want someone to steer the whole game?',
+    pitchB: 'Still me.',
+    proof: 'Salescode — cut a 6–9 hour enterprise pipeline to 5 minutes.',
+    still: '/media/rally-set.png',
+    video: '/media/rally-set.mp4',
+  },
+  {
+    id: 'spike',
+    touch: 'THIRD TOUCH',
+    position: 'SPIKER',
+    pitchA: 'Want the impactful final touch?',
+    pitchB: "Let's talk.",
+    proof: 'Leegality — AI features live for 2,000+ businesses.',
+    still: '/media/rally-spike.png',
+    video: '/media/rally-spike.mp4',
+  },
+]
+
+export const DESK = {
+  still: '/media/desk.png',
+  video: '/media/desk.mp4',
 }

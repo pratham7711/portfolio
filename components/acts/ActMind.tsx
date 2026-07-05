@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { SITE, EXPERIENCE, SKILL_GROUPS } from '@/lib/data'
+import { SITE, EXPERIENCE, SKILL_GROUPS, STATS } from '@/lib/data'
 import styles from './ActMind.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -78,74 +78,147 @@ function ParticleField() {
   return <canvas ref={canvasRef} className={styles.particles} aria-hidden />
 }
 
+const SCRAMBLE_CHARS = '!<>-_\\/[]{}—=+*^?#$'
+
+function splitWords(el: HTMLElement) {
+  if (el.dataset.split) return
+  el.dataset.split = '1'
+  const walk = (node: Node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const parts = (node.textContent || '').split(/(\s+)/)
+      const frag = document.createDocumentFragment()
+      parts.forEach((part) => {
+        if (!part.trim()) {
+          frag.appendChild(document.createTextNode(part))
+          return
+        }
+        const span = document.createElement('span')
+        span.className = 'reveal-word'
+        span.textContent = part
+        frag.appendChild(span)
+      })
+      node.parentNode?.replaceChild(frag, node)
+    } else {
+      Array.from(node.childNodes).forEach(walk)
+    }
+  }
+  Array.from(el.childNodes).forEach(walk)
+}
+
 export default function ActMind() {
   const sectionRef = useRef<HTMLElement>(null)
   const railRef = useRef<HTMLDivElement>(null)
   const railWrapRef = useRef<HTMLDivElement>(null)
+  const railSlideRef = useRef<HTMLDivElement>(null)
+  const statementRef = useRef<HTMLDivElement>(null)
   const [titleIdx, setTitleIdx] = useState(0)
+  const [scrambled, setScrambled] = useState(SITE.titles[0])
 
-  // rotating titles
+  // rotating titles with scramble decode effect
   useEffect(() => {
-    const t = setInterval(() => setTitleIdx((i) => (i + 1) % SITE.titles.length), 2600)
+    const t = setInterval(() => setTitleIdx((i) => (i + 1) % SITE.titles.length), 2800)
     return () => clearInterval(t)
   }, [])
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // hero letters rise in
-      gsap.fromTo(
-        `.${styles.heroLetter}`,
-        { yPercent: 110, opacity: 0 },
-        {
-          yPercent: 0,
-          opacity: 1,
-          stagger: 0.045,
-          duration: 0.9,
-          ease: 'power4.out',
-          delay: 0.15,
-        }
-      )
+    const target = SITE.titles[titleIdx]
+    let frame = 0
+    const total = 14
+    const iv = setInterval(() => {
+      frame++
+      const reveal = Math.floor((frame / total) * target.length)
+      const out = target
+        .split('')
+        .map((ch, i) => {
+          if (ch === ' ') return ' '
+          if (i < reveal) return ch
+          return SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+        })
+        .join('')
+      setScrambled(out)
+      if (frame >= total) {
+        setScrambled(target)
+        clearInterval(iv)
+      }
+    }, 42)
+    return () => clearInterval(iv)
+  }, [titleIdx])
 
-      // HORIZONTAL career rail — the signature horizontal scroll of Act I
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // statement copy decodes word-by-word as you scroll
+      const statement = statementRef.current
+      if (statement) {
+        const text = statement.querySelector(`.${styles.statementText}`)
+        if (text instanceof HTMLElement) {
+          splitWords(text)
+          gsap.fromTo(
+            text.querySelectorAll('.reveal-word'),
+            { opacity: 0.1 },
+            {
+              opacity: 1,
+              stagger: 0.4,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: text,
+                start: 'top 82%',
+                end: 'top 28%',
+                scrub: 0.4,
+              },
+            }
+          )
+        }
+
+        // stay pinned under the incoming career panel — it covers this screen
+        ScrollTrigger.create({
+          trigger: statement,
+          start: 'bottom bottom',
+          end: () => `+=${window.innerHeight * 1.4}`,
+          pin: true,
+          pinSpacing: false,
+        })
+      }
+
+      // HORIZONTAL career rail — sweeps in from the right, then scrolls sideways
       const rail = railRef.current
       const wrap = railWrapRef.current
-      if (rail && wrap) {
+      const slide = railSlideRef.current
+      if (rail && wrap && slide) {
         const getDist = () => rail.scrollWidth - window.innerWidth
-        gsap.to(rail, {
-          x: () => -getDist(),
-          ease: 'none',
+        const tl = gsap.timeline({
           scrollTrigger: {
             trigger: wrap,
             start: 'top top',
-            end: () => `+=${getDist()}`,
+            end: () => `+=${getDist() + window.innerHeight}`,
             pin: true,
             scrub: 0.5,
             invalidateOnRefresh: true,
           },
         })
-
-        // per-card parallax inside the rail
-        gsap.utils.toArray<HTMLElement>(`.${styles.playCard}`).forEach((card) => {
-          gsap.fromTo(
-            card.querySelector(`.${styles.playTag}`),
-            { xPercent: 30, opacity: 0 },
-            {
-              xPercent: 0,
-              opacity: 1,
-              scrollTrigger: {
-                trigger: card,
-                containerAnimation: gsap.getTweensOf(rail)[0],
-                start: 'left 80%',
-                scrub: true,
-              },
-            }
-          )
-        })
+        tl.fromTo(
+          slide,
+          { xPercent: 100 },
+          { xPercent: 0, duration: 0.42, ease: 'power2.out' }
+        )
+        tl.fromTo(
+          `.${styles.railIntro} > *`,
+          { opacity: 0, y: 44 },
+          { opacity: 1, y: 0, stagger: 0.045, duration: 0.16, ease: 'power3.out' },
+          '-=0.12'
+        )
+        tl.fromTo(
+          `.${styles.playCard}`,
+          { opacity: 0, y: 60 },
+          { opacity: 1, y: 0, stagger: 0.05, duration: 0.18, ease: 'power3.out' },
+          '<+=0.04'
+        )
+        tl.to(rail, { x: () => -getDist(), duration: 1, ease: 'none' }, '>')
       }
 
       // stat count-ups — reel style punch
       gsap.utils.toArray<HTMLElement>(`.${styles.statNum}`).forEach((el) => {
         const target = Number(el.dataset.count || 0)
+        const prefix = el.dataset.prefix || ''
         const suffix = el.dataset.suffix || ''
         const obj = { v: 0 }
         gsap.to(obj, {
@@ -154,7 +227,7 @@ export default function ActMind() {
           ease: 'power2.out',
           scrollTrigger: { trigger: el, start: 'top 88%' },
           onUpdate: () => {
-            el.textContent = `${Math.round(obj.v)}${suffix}`
+            el.textContent = `${prefix}${Math.round(obj.v).toLocaleString('en-US')}${suffix}`
           },
         })
       })
@@ -180,49 +253,37 @@ export default function ActMind() {
   }, [])
 
   return (
-    <section id="act-mind" ref={sectionRef} className={styles.act}>
+    <section id="work" ref={sectionRef} className={styles.act}>
       {/* HERO */}
-      <div className={styles.hero} id="top">
+      <div className={styles.infoHead} id="top">
         <ParticleField />
         <p className={styles.kicker}>
-          <span className={styles.kickerSet}>SET 1</span> — THE MIND
+          <span className={styles.kickerSet}>THE FILE</span> — WHO I AM
         </p>
-        <h1 className={styles.heroName} aria-label={SITE.name}>
-          {SITE.name.split('').map((ch, i) => (
-            <span key={i} className={styles.heroLetterWrap} aria-hidden>
-              <span className={styles.heroLetter}>{ch === ' ' ? ' ' : ch}</span>
-            </span>
-          ))}
-        </h1>
+        <h1 className={styles.infoName}>{SITE.name}</h1>
         <div className={styles.heroSub}>
-          <span className={styles.heroTitleRotator} key={titleIdx}>
-            {SITE.titles[titleIdx]}
-          </span>
+          <span className={styles.heroTitleRotator}>{scrambled}</span>
           <span className={styles.heroTag}>{SITE.tagline}</span>
-        </div>
-        <div className={styles.scrollHint} aria-hidden>
-          <span>SCROLL TO SERVE</span>
-          <span className={styles.scrollLine} />
         </div>
       </div>
 
       {/* STATEMENT */}
-      <div className={styles.statement}>
+      <div ref={statementRef} className={styles.statement}>
         <p className={styles.statementText}>
           Engineer at <strong>Leegality</strong>. I design systems the way a setter
           reads a court — <em>see everything, touch everything, make everyone
           else look good.</em>
         </p>
         <div className={styles.statRow}>
-          {[
-            { n: 3, suffix: '+', label: 'YEARS SHIPPING' },
-            { n: 3, suffix: '', label: 'COMPANIES' },
-            { n: 6, suffix: '+', label: 'PROJECTS LIVE' },
-            { n: 2, suffix: '', label: 'SEASONS AS CAPTAIN' },
-          ].map((s) => (
+          {STATS.map((s) => (
             <div key={s.label} className={styles.stat}>
-              <span className={styles.statNum} data-count={s.n} data-suffix={s.suffix}>
-                0{s.suffix}
+              <span
+                className={styles.statNum}
+                data-count={s.n}
+                data-prefix={s.prefix}
+                data-suffix={s.suffix}
+              >
+                {s.prefix}0{s.suffix}
               </span>
               <span className={styles.statLabel}>{s.label}</span>
             </div>
@@ -232,31 +293,37 @@ export default function ActMind() {
 
       {/* CAREER — horizontal rail */}
       <div ref={railWrapRef} className={styles.railWrap}>
-        <div ref={railRef} className={styles.rail}>
-          <div className={styles.railIntro}>
-            <p className="act-label">CAREER</p>
-            <h2 className={styles.railTitle}>
-              THREE
-              <br />
-              TOUCHES
-            </h2>
-            <p className={styles.railHint}>scroll →</p>
-          </div>
-          {EXPERIENCE.map((exp) => (
-            <article key={exp.company} className={styles.playCard}>
-              <p className={styles.playTag}>{exp.play}</p>
-              <h3 className={styles.playCompany}>{exp.company}</h3>
-              <p className={styles.playRole}>
-                {exp.role} · {exp.period}
+        <div ref={railSlideRef} className={styles.railSlide}>
+          <div ref={railRef} className={styles.rail}>
+            <div className={styles.railIntro}>
+              <p className="act-label">CAREER</p>
+              <h2 className={styles.railTitle}>
+                THREE
+                <br />
+                SEASONS
+              </h2>
+              <p className={styles.railRule}>
+                Every season a different court, a bigger game. Same setter
+                running the plays.
               </p>
-              <p className={styles.playSummary}>{exp.summary}</p>
-              <ul className={styles.playStack}>
-                {exp.stack.map((s) => (
-                  <li key={s}>{s}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
+              <p className={styles.railHint}>scroll →</p>
+            </div>
+            {EXPERIENCE.map((exp) => (
+              <article key={exp.company} className={styles.playCard}>
+                <p className={styles.playTag}>{exp.play}</p>
+                <h3 className={styles.playCompany}>{exp.company}</h3>
+                <p className={styles.playRole}>
+                  {exp.role} · {exp.period}
+                </p>
+                <p className={styles.playSummary}>{exp.summary}</p>
+                <ul className={styles.playStack}>
+                  {exp.stack.map((s) => (
+                    <li key={s}>{s}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
 

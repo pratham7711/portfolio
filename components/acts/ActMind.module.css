@@ -121,10 +121,32 @@
   }
 }
 
+/* ---------- INFO HEADER ---------- */
+.infoHead {
+  min-height: 62svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  padding: calc(var(--nav-h) + 6vh) 6vw 4vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.infoName {
+  font-size: clamp(2.4rem, 7.5vw, 6rem);
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
 /* ---------- STATEMENT ---------- */
 .statement {
   padding: 22vh 6vw;
   max-width: 1100px;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .statementText {
@@ -173,6 +195,15 @@
 /* ---------- CAREER RAIL ---------- */
 .railWrap {
   overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.railSlide {
+  min-height: 100svh;
+  background: linear-gradient(180deg, var(--mind-bg-2), var(--mind-bg));
+  box-shadow: -60px 0 120px rgba(0, 0, 0, 0.55);
+  will-change: transform;
 }
 
 .rail {
@@ -195,6 +226,15 @@
 .railTitle {
   font-size: clamp(3rem, 8vw, 7rem);
   color: var(--mind-text);
+}
+
+.railRule {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--mind-dim);
+  max-width: 34ch;
+  border-left: 2px solid var(--accent-dim);
+  padding-left: 14px;
 }
 
 .railHint {
@@ -307,8 +347,22 @@
 @media (max-width: 700px) {
   .rail {
     gap: 6vw;
+    padding: 9vh 6vw;
+  }
+  .railIntro {
+    min-width: 78vw;
   }
   .playCard {
     padding: 28px;
+    width: min(440px, 84vw);
+  }
+  .statRow {
+    gap: 28px;
+  }
+  .statement {
+    padding: 14vh 6vw;
+  }
+  .skills {
+    padding: 12vh 6vw 16vh;
   }
 }

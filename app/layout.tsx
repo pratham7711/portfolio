@@ -22,14 +22,57 @@ const mono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'Pratham Sharma — Engineer & Setter',
+  metadataBase: new URL('https://portfolio-prathams-projects-371c8ade.vercel.app'),
+  title: 'Pratham Sharma — Full Stack & AI Engineer',
   description:
-    'Full-stack & AI engineer at Leegality. A portfolio in three acts: the mind, the body, the match point.',
+    'Pratham Sharma — Full-stack & AI engineer at Leegality, building document infrastructure used by 2000+ businesses. RAG systems, Next.js, design systems. Volleyball captain. A portfolio told like a match.',
+  keywords: [
+    'Pratham Sharma',
+    'full stack developer',
+    'AI engineer India',
+    'Next.js developer',
+    'React developer',
+    'Leegality',
+    'RAG LangChain developer',
+    'frontend engineer India',
+  ],
   openGraph: {
-    title: 'Pratham Sharma — Engineer & Setter',
-    description: 'A portfolio in three acts.',
+    title: 'Pratham Sharma — Full Stack & AI Engineer',
+    description:
+      'Engineer at Leegality. The careful first touch, the game-steering set, the final impact — a portfolio told like a match.',
     type: 'website',
+    images: ['/media/rally-set.png'],
+    siteName: 'Pratham Sharma',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pratham Sharma — Full Stack & AI Engineer',
+    description: 'A portfolio told like a volleyball match. Engineer at Leegality.',
+    images: ['/media/rally-set.png'],
+  },
+}
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Pratham Sharma',
+  jobTitle: 'Software Engineer — Full Stack & AI',
+  worksFor: { '@type': 'Organization', name: 'Leegality' },
+  email: 'mailto:prathamsharma7711@gmail.com',
+  sameAs: [
+    'https://github.com/pratham7711',
+    'https://www.linkedin.com/in/pratham-sharma-a7a97a201',
+  ],
+  knowsAbout: [
+    'React',
+    'Next.js',
+    'TypeScript',
+    'AI engineering',
+    'RAG',
+    'LangChain',
+    'Node.js',
+    'Design systems',
+  ],
 }
 
 export default function RootLayout({
@@ -37,7 +80,13 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${grotesk.variable} ${fraunces.variable} ${mono.variable}`}>
-      <body>{children}</body>
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   )
 }
