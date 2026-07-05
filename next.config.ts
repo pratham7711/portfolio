@@ -10,6 +10,16 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'd2ol7oe51mr4n9.cloudfront.net' },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: '/media/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+    ]
+  },
 }
 
 export default nextConfig

@@ -32,16 +32,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "/tmp/final/types/**/*.ts",
-    "/tmp/nd5/types/**/*.ts",
-    "/tmp/nextdev/types/**/*.ts",
-    "/tmp/nextdev2/types/**/*.ts",
-    "/tmp/nextdev3/types/**/*.ts",
-    "/tmp/nextdev4/types/**/*.ts",
-    "/tmp/sota/types/**/*.ts",
-    "/tmp/v3/types/**/*.ts",
-    "next-env.d.ts",
-    "tmp/final-verify/types/**/*.ts"
+    "next-env.d.ts"
   ],
   "exclude": [
     "node_modules",

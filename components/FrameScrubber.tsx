@@ -10,16 +10,18 @@ interface FrameScrubberProps {
   base: string
   count: number
   className?: string
+  priority?: 'high' | 'low'
 }
 
 const FrameScrubber = forwardRef<FrameScrubberHandle, FrameScrubberProps>(
-  function FrameScrubber({ base, count, className }, ref) {
+  function FrameScrubber({ base, count, className, priority = 'low' }, ref) {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const stateRef = useRef({
       images: [] as HTMLImageElement[],
       loaded: [] as boolean[],
       target: 0,
       drawn: -1,
+      started: false,
     })
 
     const draw = (idx: number) => {
@@ -60,9 +62,10 @@ const FrameScrubber = forwardRef<FrameScrubberHandle, FrameScrubberProps>(
       s.images = []
       s.loaded = new Array(count).fill(false)
       s.drawn = -1
+      s.started = false
 
       const resize = () => {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2)
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
         canvas.width = Math.round(canvas.offsetWidth * dpr)
         canvas.height = Math.round(canvas.offsetHeight * dpr)
         s.drawn = -1
@@ -72,25 +75,54 @@ const FrameScrubber = forwardRef<FrameScrubberHandle, FrameScrubberProps>(
       ro.observe(canvas)
       resize()
 
-      const order: number[] = [0]
-      for (let i = 6; i < count; i += 6) order.push(i)
-      for (let i = 0; i < count; i++) if (!order.includes(i)) order.push(i)
+      const startLoading = () => {
+        if (s.started) return
+        s.started = true
 
-      order.forEach((i, rank) => {
-        const img = new Image()
-        img.decoding = 'async'
-        if (rank > 0) img.fetchPriority = 'low'
-        img.onload = () => {
-          s.loaded[i] = true
-          const t = s.target
-          if (s.drawn === -1 || Math.abs(i - t) < Math.abs(s.drawn - t)) draw(t)
-        }
-        img.src = `${base}/${String(i + 1).padStart(3, '0')}.jpg`
-        s.images[i] = img
-      })
+        const order: number[] = [0]
+        for (let i = 6; i < count; i += 6) order.push(i)
+        for (let i = 0; i < count; i++) if (!order.includes(i)) order.push(i)
 
-      return () => ro.disconnect()
-    }, [base, count])
+        order.forEach((i, rank) => {
+          const img = new Image()
+          img.decoding = 'async'
+          if (rank > 0 || priority === 'low') img.fetchPriority = 'low'
+          img.onload = () => {
+            s.loaded[i] = true
+            const t = s.target
+            if (s.drawn === -1 || Math.abs(i - t) < Math.abs(s.drawn - t)) draw(t)
+          }
+          img.src = `${base}/${String(i + 1).padStart(3, '0')}.webp`
+          s.images[i] = img
+        })
+      }
+
+      const ric: (cb: () => void) => void =
+        typeof window.requestIdleCallback === 'function'
+          ? (cb) => window.requestIdleCallback(cb, { timeout: 2000 })
+          : (cb) => window.setTimeout(cb, 200)
+
+      let io: IntersectionObserver | null = null
+      if (priority === 'high') {
+        startLoading()
+      } else {
+        io = new IntersectionObserver(
+          (entries) => {
+            if (entries.some((e) => e.isIntersecting)) {
+              io?.disconnect()
+              ric(startLoading)
+            }
+          },
+          { rootMargin: '800px 0px' }
+        )
+        io.observe(canvas)
+      }
+
+      return () => {
+        ro.disconnect()
+        io?.disconnect()
+      }
+    }, [base, count, priority])
 
     useImperativeHandle(ref, () => ({
       setProgress: (p: number) => {

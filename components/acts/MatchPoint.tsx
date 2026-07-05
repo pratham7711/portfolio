@@ -4,6 +4,7 @@ import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SITE, MAILTO } from '@/lib/data'
+import ViewCounter from '@/components/ViewCounter'
 import styles from './ActMatch.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -84,6 +85,7 @@ export default function MatchPoint() {
         </div>
         <footer className={styles.footer}>
           <span>© {new Date().getFullYear()} PRATHAM SHARMA</span>
+          <ViewCounter />
           <span className={styles.footerNote}>
             BUILT IN THREE ACTS · NEXT.JS · GSAP · HIGGSFIELD
           </span>

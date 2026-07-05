@@ -28,19 +28,23 @@ export default function Cursor() {
     let ry = -100
     let raf = 0
 
-    const onMove = (e: MouseEvent) => {
-      x = e.clientX
-      y = e.clientY
-      dot.style.transform = `translate(${x}px, ${y}px)`
-    }
-
     const tick = () => {
       rx += (x - rx) * 0.16
       ry += (y - ry) * 0.16
       ring.style.transform = `translate(${rx}px, ${ry}px)`
-      raf = requestAnimationFrame(tick)
+      if (Math.abs(x - rx) > 0.1 || Math.abs(y - ry) > 0.1) {
+        raf = requestAnimationFrame(tick)
+      } else {
+        raf = 0
+      }
     }
-    raf = requestAnimationFrame(tick)
+
+    const onMove = (e: MouseEvent) => {
+      x = e.clientX
+      y = e.clientY
+      dot.style.transform = `translate(${x}px, ${y}px)`
+      if (!raf) raf = requestAnimationFrame(tick)
+    }
 
     const onOver = (e: MouseEvent) => {
       const t = (e.target as HTMLElement).closest('a, button, [data-cursor]')

@@ -113,7 +113,7 @@ export interface Project {
 export const PROJECTS: Project[] = [
   {
     slug: 'megakernel-tts',
-    image: '/media/projects/megakernel-tts.png',
+    image: '/media/projects/megakernel-tts.webp',
     number: '01',
     name: 'MEGAKERNEL TTS',
     playCall: 'KILL SHOT',
@@ -126,7 +126,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'docmind-ai',
-    image: '/media/projects/docmind-ai.png',
+    image: '/media/projects/docmind-ai.webp',
     number: '02',
     name: 'DOCMIND AI',
     playCall: 'QUICK SET — A1',
@@ -140,7 +140,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'collabboard',
-    image: '/media/projects/collabboard.png',
+    image: '/media/projects/collabboard.webp',
     number: '03',
     name: 'COLLABBOARD',
     playCall: 'DOUBLE QUICK',
@@ -153,7 +153,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'pratham-ui',
-    image: '/media/projects/pratham-ui.png',
+    image: '/media/projects/pratham-ui.webp',
     number: '04',
     name: '@PRATHAM7711/UI',
     playCall: 'SETTER DUMP',
@@ -167,7 +167,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'shopwave',
-    image: '/media/projects/shopwave.png',
+    image: '/media/projects/shopwave.webp',
     number: '05',
     name: 'SHOPWAVE',
     playCall: 'BACK-ROW ATTACK',
@@ -180,7 +180,7 @@ export const PROJECTS: Project[] = [
   },
   {
     slug: 'devpulse',
-    image: '/media/projects/devpulse.png',
+    image: '/media/projects/devpulse.webp',
     number: '06',
     name: 'DEVPULSE',
     playCall: 'PIPE ATTACK',

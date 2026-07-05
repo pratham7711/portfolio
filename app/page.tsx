@@ -1,21 +1,23 @@
 'use client'
 
 import { useState } from 'react'
+import dynamic from 'next/dynamic'
 import LenisProvider from '@/components/LenisProvider'
 import Nav from '@/components/Nav'
 import Loader from '@/components/Loader'
 import Cursor from '@/components/Cursor'
 import ScrollProgress from '@/components/ScrollProgress'
-import Marquee from '@/components/Marquee'
-import EasterEggs from '@/components/EasterEggs'
-import FlashCut from '@/components/FlashCut'
 import Grain from '@/components/Grain'
 import RallyOpen from '@/components/acts/RallyOpen'
-import EngineerBridge from '@/components/acts/EngineerBridge'
-import ActMind from '@/components/acts/ActMind'
-import Interests from '@/components/acts/Interests'
-import ActMatch from '@/components/acts/ActMatch'
-import MatchPoint from '@/components/acts/MatchPoint'
+
+const EngineerBridge = dynamic(() => import('@/components/acts/EngineerBridge'))
+const ActMind = dynamic(() => import('@/components/acts/ActMind'))
+const Marquee = dynamic(() => import('@/components/Marquee'))
+const ActMatch = dynamic(() => import('@/components/acts/ActMatch'))
+const Interests = dynamic(() => import('@/components/acts/Interests'))
+const MatchPoint = dynamic(() => import('@/components/acts/MatchPoint'))
+const EasterEggs = dynamic(() => import('@/components/EasterEggs'), { ssr: false })
+const FlashCut = dynamic(() => import('@/components/FlashCut'), { ssr: false })
 
 export default function Home() {
   const [loading, setLoading] = useState(true)

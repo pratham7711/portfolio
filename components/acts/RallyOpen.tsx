@@ -142,6 +142,7 @@ export default function RallyOpen() {
             className={styles.video}
             base={r.seq}
             count={SEQ_FRAMES}
+            priority={i === 0 ? 'high' : 'low'}
           />
           <div className={styles.shade} />
           <div className={styles.copy}>
