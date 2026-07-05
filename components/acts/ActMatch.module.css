@@ -10,60 +10,90 @@
   color: var(--amber);
 }
 
-/* ---------- PROJECT RAIL ---------- */
-.wrap {
-  overflow: hidden;
-}
-
-.rail {
-  display: flex;
-  align-items: center;
-  gap: 4vw;
-  padding: 10vh 6vw;
-  width: max-content;
-  min-height: 100svh;
-}
-
-.intro {
-  min-width: 32vw;
+/* ---------- PROJECT DECK ---------- */
+.deckHead {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  padding: 20vh 6vw 10vh;
 }
 
-.introTitle {
-  font-size: clamp(3rem, 8vw, 7rem);
+.deckTitle {
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  line-height: 0.95;
   background: linear-gradient(100deg, var(--accent), var(--amber));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.introHint {
+.deckHint {
   font-family: var(--font-mono);
   font-size: 0.72rem;
   letter-spacing: 0.25em;
   color: var(--mind-dim);
 }
 
-.card {
-  width: min(520px, 78vw);
-  min-height: 62vh;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 44px;
-  border-radius: 18px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--proj) 12%, transparent), transparent 55%),
-    linear-gradient(160deg, #12141b, #0d0f14);
-  transition: border-color 0.3s, transform 0.3s var(--ease-out);
+.deck {
+  padding: 0 4vw 16vh;
 }
 
-.card:hover {
-  border-color: color-mix(in srgb, var(--proj) 55%, transparent);
-  transform: translateY(-6px);
+.deckCard {
+  position: sticky;
+  top: calc(var(--nav-h) + 2vh + var(--stack, 0px));
+  width: min(1140px, 100%);
+  margin: 0 auto 14vh;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background:
+    radial-gradient(120% 120% at 100% 0%, color-mix(in srgb, var(--proj) 13%, transparent), transparent 55%),
+    linear-gradient(160deg, #12141b, #0d0f14);
+  overflow: hidden;
+  box-shadow: 0 -20px 70px rgba(0, 0, 0, 0.5);
+  will-change: transform, filter;
+}
+
+.deckGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  min-height: min(70vh, 700px);
+}
+
+.deckInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: clamp(28px, 3.6vw, 54px);
+}
+
+.deckMedia {
+  position: relative;
+  background: #0a0c11;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.deckMedia img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: saturate(0.9) brightness(0.94);
+}
+
+.deckMedia::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(16, 18, 24, 0.55), transparent 26%);
+  pointer-events: none;
+}
+
+@media (max-width: 900px) {
+  .deckMedia::after {
+    background: linear-gradient(180deg, transparent 65%, rgba(16, 18, 24, 0.5));
+  }
 }
 
 .cardHead {
@@ -93,29 +123,6 @@
   color: var(--mind-dim);
   line-height: 1.6;
   font-size: 0.98rem;
-}
-
-.cardMedia {
-  aspect-ratio: 16 / 9;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: #0a0c11;
-}
-
-.cardMedia img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-  filter: saturate(0.92);
-  transform: scale(1.04);
-  transition: transform 0.5s var(--ease-out);
-}
-
-.card:hover .cardMedia img {
-  transform: scale(1);
 }
 
 .cardTags {
@@ -289,18 +296,34 @@
   color: var(--mind-dim);
 }
 
-@media (max-width: 700px) {
-  .rail {
-    gap: 6vw;
-    padding: 9vh 6vw;
-  }
-  .intro {
-    min-width: 78vw;
-  }
-  .card {
-    width: min(460px, 84vw);
+@media (max-width: 900px) {
+  .deckGrid {
+    grid-template-columns: 1fr;
     min-height: auto;
-    padding: 26px;
+  }
+  .deckMedia {
+    order: -1;
+    aspect-ratio: 16 / 9;
+    border-left: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+@media (max-width: 700px) {
+  .deckHead {
+    padding: 16vh 6vw 8vh;
+  }
+  .deck {
+    padding: 0 3vw 12vh;
+  }
+  .deckCard {
+    top: calc(var(--nav-h) + 1vh + var(--stack, 0px) / 3);
+    margin-bottom: 10vh;
+    border-radius: 16px;
+  }
+  .deckInfo {
+    padding: 22px;
+    gap: 14px;
   }
   .cta {
     gap: 26px;

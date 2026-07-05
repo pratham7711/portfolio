@@ -220,10 +220,7 @@ export const HOBBIES = [
   },
 ]
 
-/** Higgsfield-generated media assets */
-export const MEDIA = {
-  editorialStill: '/media/rally-set.png',
-}
+export const SEQ_FRAMES = 61
 
 /** The rally — one possession, three touches, three pitches. */
 export const RALLY = [
@@ -234,8 +231,7 @@ export const RALLY = [
     pitchA: 'Want the careful first touch?',
     pitchB: "I'm the right choice.",
     proof: 'Realtos — solo-built a PropTech platform to production in 12 weeks.',
-    still: '/media/rally-dig.png',
-    video: '/media/rally-dig.mp4',
+    seq: '/media/seq/rally-dig',
   },
   {
     id: 'set',
@@ -244,8 +240,7 @@ export const RALLY = [
     pitchA: 'Want someone to steer the whole game?',
     pitchB: 'Still me.',
     proof: 'Salescode — cut a 6–9 hour enterprise pipeline to 5 minutes.',
-    still: '/media/rally-set.png',
-    video: '/media/rally-set.mp4',
+    seq: '/media/seq/rally-set',
   },
   {
     id: 'spike',
@@ -254,12 +249,10 @@ export const RALLY = [
     pitchA: 'Want the impactful final touch?',
     pitchB: "Let's talk.",
     proof: 'Leegality — AI features live for 2,000+ businesses.',
-    still: '/media/rally-spike.png',
-    video: '/media/rally-spike.mp4',
+    seq: '/media/seq/rally-spike',
   },
 ]
 
 export const DESK = {
-  still: '/media/desk.png',
-  video: '/media/desk.mp4',
+  seq: '/media/seq/desk',
 }

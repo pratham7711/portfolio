@@ -3,7 +3,8 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { DESK } from '@/lib/data'
+import { DESK, SEQ_FRAMES } from '@/lib/data'
+import FrameScrubber, { FrameScrubberHandle } from '@/components/FrameScrubber'
 import styles from './EngineerBridge.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -14,7 +15,7 @@ gsap.registerPlugin(ScrollTrigger)
  */
 export default function EngineerBridge() {
   const wrapRef = useRef<HTMLElement>(null)
-  const videoRef = useRef<HTMLVideoElement>(null)
+  const scrubberRef = useRef<FrameScrubberHandle>(null)
 
   useEffect(() => {
     const wrap = wrapRef.current
@@ -60,8 +61,8 @@ export default function EngineerBridge() {
         )
         .to(`.${styles.frame}`, { duration: 0.8 })
 
-      const video = videoRef.current
-      if (video) {
+      const scrubber = scrubberRef.current
+      if (scrubber) {
         const revealStart = 0.9
         const scrub = { p: 0 }
         tl.to(
@@ -70,11 +71,7 @@ export default function EngineerBridge() {
             p: 1,
             duration: tl.duration() - revealStart,
             ease: 'none',
-            onUpdate: () => {
-              if (!video.duration) return
-              const t = scrub.p * (video.duration - 0.08)
-              if (Math.abs(video.currentTime - t) > 0.02) video.currentTime = t
-            },
+            onUpdate: () => scrubber.setProgress(scrub.p),
           },
           revealStart
         )
@@ -91,14 +88,11 @@ export default function EngineerBridge() {
       </p>
 
       <div className={styles.frame}>
-        <video
-          ref={videoRef}
+        <FrameScrubber
+          ref={scrubberRef}
           className={styles.video}
-          src={DESK.video}
-          poster={DESK.still}
-          muted
-          playsInline
-          preload="auto"
+          base={DESK.seq}
+          count={SEQ_FRAMES}
         />
         <div className={styles.shade} />
         <div className={styles.copy}>

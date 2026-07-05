@@ -133,10 +133,17 @@
   overflow: hidden;
 }
 
+.infoNameWrap {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+}
+
 .infoName {
   font-size: clamp(2.4rem, 7.5vw, 6rem);
   letter-spacing: -0.02em;
   position: relative;
+  will-change: transform;
 }
 
 /* ---------- STATEMENT ---------- */
@@ -200,10 +207,47 @@
 }
 
 .railSlide {
+  position: relative;
   min-height: 100svh;
   background: linear-gradient(180deg, var(--mind-bg-2), var(--mind-bg));
   box-shadow: -60px 0 120px rgba(0, 0, 0, 0.55);
   will-change: transform;
+}
+
+.railProgress {
+  position: absolute;
+  left: 6vw;
+  right: 6vw;
+  bottom: 4.5vh;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.railProgressLabel {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  color: var(--mind-dim);
+  white-space: nowrap;
+}
+
+.railProgressTrack {
+  flex: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+.railProgressFill {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--amber));
+  transform: scaleX(0);
+  transform-origin: left;
 }
 
 .rail {

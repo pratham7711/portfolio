@@ -3,8 +3,31 @@
 import { useRef, useEffect, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { motion } from 'motion/react'
 import { SITE, EXPERIENCE, SKILL_GROUPS, STATS } from '@/lib/data'
 import styles from './ActMind.module.css'
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+}
+
+const rise = {
+  hidden: { opacity: 0, y: 40 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const },
+  },
+}
+
+const nameReveal = {
+  hidden: { yPercent: 110 },
+  show: {
+    yPercent: 0,
+    transition: { duration: 0.9, ease: [0.19, 1, 0.22, 1] as const },
+  },
+}
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -206,13 +229,40 @@ export default function ActMind() {
           { opacity: 1, y: 0, stagger: 0.045, duration: 0.16, ease: 'power3.out' },
           '-=0.12'
         )
-        tl.fromTo(
-          `.${styles.playCard}`,
-          { opacity: 0, y: 60 },
-          { opacity: 1, y: 0, stagger: 0.05, duration: 0.18, ease: 'power3.out' },
-          '<+=0.04'
-        )
         tl.to(rail, { x: () => -getDist(), duration: 1, ease: 'none' }, '>')
+
+        // cards materialize as they enter from the right; progress bar tracks the rail
+        const cards = gsap.utils.toArray<HTMLElement>(`.${styles.playCard}`)
+        const fill = slide.querySelector<HTMLElement>(`.${styles.railProgressFill}`)
+        const label = slide.querySelector<HTMLElement>(`.${styles.railProgressLabel}`)
+        const updateRail = () => {
+          const vw = window.innerWidth
+          cards.forEach((c) => {
+            const r = c.getBoundingClientRect()
+            const t = gsap.utils.clamp(0, 1, (vw * 0.94 - r.left) / (vw * 0.5))
+            gsap.set(c, {
+              opacity: 0.12 + 0.88 * t,
+              y: 56 * (1 - t),
+              rotate: 1.5 * (1 - t),
+              scale: 0.95 + 0.05 * t,
+            })
+          })
+          const dist = getDist()
+          const p =
+            dist > 0
+              ? gsap.utils.clamp(0, 1, -(gsap.getProperty(rail, 'x') as number) / dist)
+              : 0
+          if (fill) gsap.set(fill, { scaleX: p })
+          if (label) {
+            const season = Math.min(
+              EXPERIENCE.length,
+              Math.round(p * (EXPERIENCE.length - 1)) + 1
+            )
+            label.textContent = `SEASON 0${season} / 0${EXPERIENCE.length}`
+          }
+        }
+        tl.eventCallback('onUpdate', updateRail)
+        updateRail()
       }
 
       // stat count-ups — reel style punch
@@ -232,21 +282,6 @@ export default function ActMind() {
         })
       })
 
-      // skill groups stagger up
-      gsap.utils.toArray<HTMLElement>(`.${styles.skillGroup}`).forEach((el, i) => {
-        gsap.fromTo(
-          el,
-          { y: 60, opacity: 0 },
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: 'power3.out',
-            delay: i * 0.08,
-            scrollTrigger: { trigger: el, start: 'top 85%' },
-          }
-        )
-      })
     }, sectionRef)
 
     return () => ctx.revert()
@@ -257,14 +292,25 @@ export default function ActMind() {
       {/* HERO */}
       <div className={styles.infoHead} id="top">
         <ParticleField />
-        <p className={styles.kicker}>
-          <span className={styles.kickerSet}>THE FILE</span> — WHO I AM
-        </p>
-        <h1 className={styles.infoName}>{SITE.name}</h1>
-        <div className={styles.heroSub}>
-          <span className={styles.heroTitleRotator}>{scrambled}</span>
-          <span className={styles.heroTag}>{SITE.tagline}</span>
-        </div>
+        <motion.div
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.4 }}
+        >
+          <motion.p variants={rise} className={styles.kicker}>
+            <span className={styles.kickerSet}>THE FILE</span> — WHO I AM
+          </motion.p>
+          <span className={styles.infoNameWrap}>
+            <motion.h1 variants={nameReveal} className={styles.infoName}>
+              {SITE.name}
+            </motion.h1>
+          </span>
+          <motion.div variants={rise} className={styles.heroSub}>
+            <span className={styles.heroTitleRotator}>{scrambled}</span>
+            <span className={styles.heroTag}>{SITE.tagline}</span>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* STATEMENT */}
@@ -324,26 +370,55 @@ export default function ActMind() {
               </article>
             ))}
           </div>
+          <div className={styles.railProgress}>
+            <span className={styles.railProgressLabel}>SEASON 01 / 03</span>
+            <span className={styles.railProgressTrack}>
+              <span className={styles.railProgressFill} />
+            </span>
+          </div>
         </div>
       </div>
 
       {/* SKILLS */}
       <div className={styles.skills}>
         <p className="act-label">TOOLKIT</p>
-        <div className={styles.skillGrid}>
+        <motion.div
+          className={styles.skillGrid}
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {SKILL_GROUPS.map((g) => (
-            <div key={g.label} className={styles.skillGroup}>
+            <motion.div key={g.label} variants={rise} className={styles.skillGroup}>
               <h3 className={styles.skillLabel}>{g.label}</h3>
-              <ul className={styles.skillList}>
+              <motion.ul
+                className={styles.skillList}
+                variants={{
+                  hidden: {},
+                  show: { transition: { staggerChildren: 0.045 } },
+                }}
+              >
                 {g.skills.map((s) => (
-                  <li key={s} className={styles.skill}>
+                  <motion.li
+                    key={s}
+                    className={styles.skill}
+                    variants={{
+                      hidden: { opacity: 0, x: -14 },
+                      show: {
+                        opacity: 1,
+                        x: 0,
+                        transition: { duration: 0.45, ease: 'easeOut' },
+                      },
+                    }}
+                  >
                     {s}
-                  </li>
+                  </motion.li>
                 ))}
-              </ul>
-            </div>
+              </motion.ul>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

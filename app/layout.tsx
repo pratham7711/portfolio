@@ -22,7 +22,7 @@ const mono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://portfolio-prathams-projects-371c8ade.vercel.app'),
+  metadataBase: new URL('https://www.prathamsharma.in'),
   title: 'Pratham Sharma — Full Stack & AI Engineer',
   description:
     'Pratham Sharma — Full-stack & AI engineer at Leegality, building document infrastructure used by 2000+ businesses. RAG systems, Next.js, design systems. Volleyball captain. A portfolio told like a match.',
@@ -41,14 +41,14 @@ export const metadata: Metadata = {
     description:
       'Engineer at Leegality. The careful first touch, the game-steering set, the final impact — a portfolio told like a match.',
     type: 'website',
-    images: ['/media/rally-set.png'],
+    images: ['/media/og.jpg'],
     siteName: 'Pratham Sharma',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pratham Sharma — Full Stack & AI Engineer',
     description: 'A portfolio told like a volleyball match. Engineer at Leegality.',
-    images: ['/media/rally-set.png'],
+    images: ['/media/og.jpg'],
   },
 }
 

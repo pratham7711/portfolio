@@ -3,19 +3,20 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { RALLY, SITE } from '@/lib/data'
+import { RALLY, SITE, SEQ_FRAMES } from '@/lib/data'
+import FrameScrubber, { FrameScrubberHandle } from '@/components/FrameScrubber'
 import styles from './RallyOpen.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
 /**
  * THE OPENER — the site starts inside the match.
- * Full-bleed rally videos, one per touch, each carrying a pitch line.
- * Scroll scrubs through the story: dig → set → spike.
+ * Full-bleed rally shots, one per touch, each carrying a pitch line.
+ * Scroll scrubs through the story frame by frame: dig → set → spike.
  */
 export default function RallyOpen() {
   const wrapRef = useRef<HTMLElement>(null)
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([])
+  const scrubberRefs = useRef<(FrameScrubberHandle | null)[]>([])
 
   useEffect(() => {
     const wrap = wrapRef.current
@@ -38,7 +39,7 @@ export default function RallyOpen() {
       tl.to(`.${styles.intro}`, { opacity: 0, y: -40, duration: 0.25 })
 
       beats.forEach((beat, i) => {
-        const video = videoRefs.current[i]
+        const scrubber = scrubberRefs.current[i]
         const videoEl = beat.querySelector(`.${styles.video}`)
         const pitchA = beat.querySelector(`.${styles.pitchA}`)
         const pitchB = beat.querySelector(`.${styles.pitchB}`)
@@ -100,8 +101,8 @@ export default function RallyOpen() {
           }
         }
 
-        // scroll drives playback: scrub the clip across this beat's segment
-        if (video) {
+        // scroll drives playback: scrub the frame sequence across this beat's segment
+        if (scrubber) {
           const scrub = { p: 0 }
           tl.to(
             scrub,
@@ -109,11 +110,7 @@ export default function RallyOpen() {
               p: 1,
               duration: tl.duration() - segStart,
               ease: 'none',
-              onUpdate: () => {
-                if (!video.duration) return
-                const t = scrub.p * (video.duration - 0.08)
-                if (Math.abs(video.currentTime - t) > 0.02) video.currentTime = t
-              },
+              onUpdate: () => scrubber.setProgress(scrub.p),
             },
             segStart
           )
@@ -138,16 +135,13 @@ export default function RallyOpen() {
 
       {RALLY.map((r, i) => (
         <div key={r.id} className={styles.beat}>
-          <video
+          <FrameScrubber
             ref={(el) => {
-              videoRefs.current[i] = el
+              scrubberRefs.current[i] = el
             }}
             className={styles.video}
-            src={r.video}
-            poster={r.still}
-            muted
-            playsInline
-            preload="auto"
+            base={r.seq}
+            count={SEQ_FRAMES}
           />
           <div className={styles.shade} />
           <div className={styles.copy}>
