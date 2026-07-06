@@ -23,55 +23,116 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.prathamsharma.in'),
-  title: 'Pratham Sharma — Full Stack & AI Engineer',
+  title: 'Pratham Sharma — Full-Stack & AI Software Engineer',
   description:
-    'Pratham Sharma — Full-stack & AI engineer at Leegality, building document infrastructure used by 2000+ businesses. RAG systems, Next.js, design systems. Volleyball captain. A portfolio told like a match.',
+    'Pratham Sharma is a software engineer specialising in full-stack and AI development — React, Next.js, TypeScript, Node.js, RAG and LLM systems. Currently building AI document infrastructure at Leegality, used by 2,000+ businesses.',
   keywords: [
     'Pratham Sharma',
+    'Pratham Sharma software engineer',
+    'Pratham Sharma developer',
+    'Pratham Sharma portfolio',
+    'Pratham Sharma Leegality',
+    'software engineer',
     'full stack developer',
+    'fullstack engineer',
     'AI engineer India',
     'Next.js developer',
     'React developer',
-    'Leegality',
     'RAG LangChain developer',
     'frontend engineer India',
   ],
+  alternates: {
+    canonical: '/',
+  },
+  authors: [{ name: 'Pratham Sharma', url: 'https://www.prathamsharma.in' }],
+  creator: 'Pratham Sharma',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   openGraph: {
-    title: 'Pratham Sharma — Full Stack & AI Engineer',
+    title: 'Pratham Sharma — Full-Stack & AI Software Engineer',
     description:
-      'Engineer at Leegality. The careful first touch, the game-steering set, the final impact — a portfolio told like a match.',
+      'Software engineer at Leegality. The careful first touch, the game-steering set, the final impact — a portfolio told like a match.',
     type: 'website',
+    url: 'https://www.prathamsharma.in',
+    locale: 'en_US',
     images: ['/media/og.jpg'],
     siteName: 'Pratham Sharma',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Pratham Sharma — Full Stack & AI Engineer',
-    description: 'A portfolio told like a volleyball match. Engineer at Leegality.',
+    title: 'Pratham Sharma — Full-Stack & AI Software Engineer',
+    description: 'A portfolio told like a volleyball match. Software engineer at Leegality.',
     images: ['/media/og.jpg'],
   },
 }
 
-const personJsonLd = {
+const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Pratham Sharma',
-  jobTitle: 'Software Engineer — Full Stack & AI',
-  worksFor: { '@type': 'Organization', name: 'Leegality' },
-  email: 'mailto:prathamsharma7711@gmail.com',
-  sameAs: [
-    'https://github.com/pratham7711',
-    'https://www.linkedin.com/in/pratham-sharma-a7a97a201',
-  ],
-  knowsAbout: [
-    'React',
-    'Next.js',
-    'TypeScript',
-    'AI engineering',
-    'RAG',
-    'LangChain',
-    'Node.js',
-    'Design systems',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': 'https://www.prathamsharma.in/#person',
+      name: 'Pratham Sharma',
+      alternateName: 'pratham7711',
+      url: 'https://www.prathamsharma.in',
+      image: 'https://www.prathamsharma.in/media/og.jpg',
+      jobTitle: 'Software Engineer — Full Stack & AI',
+      description:
+        'Full-stack and AI software engineer building React, Next.js, TypeScript, and LLM-powered products. Currently shipping AI document infrastructure at Leegality, used by 2,000+ businesses.',
+      worksFor: {
+        '@type': 'Organization',
+        name: 'Leegality',
+        url: 'https://www.leegality.com',
+      },
+      address: { '@type': 'PostalAddress', addressCountry: 'IN' },
+      email: 'mailto:prathamsharma7711@gmail.com',
+      sameAs: [
+        'https://github.com/pratham7711',
+        'https://www.linkedin.com/in/pratham-sharma-a555b8207',
+        'https://leetcode.com/pratham7711/',
+        'https://www.npmjs.com/~prathamsharma7711',
+      ],
+      knowsAbout: [
+        'Software engineering',
+        'Full-stack development',
+        'React',
+        'Next.js',
+        'TypeScript',
+        'Node.js',
+        'AI engineering',
+        'RAG',
+        'LangChain',
+        'CUDA',
+        'Design systems',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://www.prathamsharma.in/#website',
+      url: 'https://www.prathamsharma.in',
+      name: 'Pratham Sharma',
+      publisher: { '@id': 'https://www.prathamsharma.in/#person' },
+      inLanguage: 'en',
+    },
+    {
+      '@type': 'ProfilePage',
+      '@id': 'https://www.prathamsharma.in/#profilepage',
+      url: 'https://www.prathamsharma.in',
+      name: 'Pratham Sharma — Full-Stack & AI Software Engineer',
+      isPartOf: { '@id': 'https://www.prathamsharma.in/#website' },
+      mainEntity: { '@id': 'https://www.prathamsharma.in/#person' },
+      dateModified: '2026-07-06',
+      inLanguage: 'en',
+    },
   ],
 }
 
@@ -83,7 +144,7 @@ export default function RootLayout({
       <body>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         {children}
       </body>

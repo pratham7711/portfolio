@@ -1,44 +1,58 @@
 # Pratham Sharma
 
-> Pratham Sharma is a full-stack and AI engineer based in India with 3+ years of experience shipping production React, Node.js, GSAP, and LLM-powered products. Currently building products at scale at Leegality. LeetCode Knight. 9/10 GPA.
+> Pratham Sharma is a software engineer from India specialising in full-stack and AI development, with 3+ years of experience shipping production React, Next.js, TypeScript, Node.js, and LLM-powered products. He currently builds AI document infrastructure at Leegality, used by 2,000+ businesses.
 
-This is the personal portfolio of Pratham Sharma (also known as "prathamsharma"). It is a single-page React application showcasing his work, experience, and skills. The canonical URL is https://prathamsharma.in/.
+This is the personal portfolio of Pratham Sharma (GitHub: pratham7711). The canonical URL is https://www.prathamsharma.in/.
 
 ## About
 
 - Name: Pratham Sharma
-- Role: Full-Stack & AI Engineer
-- Current company: Leegality (legal-tech, India)
+- Role: Software Engineer — Full-Stack & AI
+- Current company: Leegality (legal-tech, India) — 2025 to present
 - Years of experience: 3+
-- Education: 9/10 GPA
-- Competitive programming: LeetCode Knight
+- Location: India
 - Email: prathamsharma7711@gmail.com
 - GitHub: https://github.com/pratham7711
-- LinkedIn: https://www.linkedin.com/in/pratham-sharma-7711
+- LinkedIn: https://www.linkedin.com/in/pratham-sharma-a555b8207
+- LeetCode: https://leetcode.com/pratham7711/
+- npm: https://www.npmjs.com/~prathamsharma7711
+- Resume: https://www.prathamsharma.in/Pratham_Sharma_Resume.pdf
 - Open to relocation: UAE, Germany, USA, Spain
+
+## Experience
+
+- Leegality (2025 — now, Software Engineer — Frontend): shipped an 18-component design system (+30% team velocity), an AI Chatbot SDK that cut support escalations 60%, and AI document review used by 2,000+ businesses.
+- Salescode.AI (2023 — 2025, Software Engineer): cut a 6–9 hour enterprise data pipeline to under 5 minutes; Kafka event pipelines with +40% throughput and −25% latency for global FMCG clients.
+- Realtos (2023, Software Engineer): built a PropTech platform frontend solo to production in 12 weeks, 500+ initial users, 99.99% uptime on AWS.
 
 ## Core skills
 
-- Frontend: React, TypeScript, Next.js, Redux, Zustand, Tailwind CSS, GSAP, Three.js, React Three Fiber, ShadCN
-- Backend: Node.js, Express, Spring Boot, REST APIs, GraphQL, WebSockets, Java
-- AI / LLM stack: LangChain, OpenAI API, Anthropic Claude API, Gemini API, embeddings, vector search, RAG pipelines
-- Databases & infra: PostgreSQL, Supabase, Upstash, Redis, Railway, Vercel, AWS basics
-- Tooling: Vite, Webpack, Playwright, Jest, ESLint
+- Frontend: React, Next.js, TypeScript, GSAP, Three.js, Tailwind CSS
+- Backend: Node.js, FastAPI, PostgreSQL, Redis, GraphQL, Kafka
+- AI / LLM: LangChain, RAG pipelines, Pinecone, OpenAI API, Gemini API, embeddings, vector search
+- AI tooling: Claude Code, Codex, Cursor, agentic workflows, prompt engineering
+- Infra: AWS, Vercel, Railway, Docker, CI/CD
+- Also: CUDA kernel work (see Megakernel TTS project)
 
 ## Notable projects
 
-Pratham has built several public projects spanning AI, full-stack web, and developer tooling. The portfolio site lists 4 featured production projects plus additional work in progress. Each project demonstrates a different combination of his stack (LLM tooling, OAuth2, serverless functions, real-time dashboards, etc.).
+- Megakernel TTS — adapted a 1,200-line persistent CUDA megakernel as the decode backend for Qwen3-TTS; ~25ms time-to-first-chunk (RTF 0.12) on an RTX 5090. https://github.com/pratham7711/e3-megakernel-tts-takehome
+- DocMind AI — AI document intelligence with cited RAG answers in under 2 seconds (FastAPI, LangChain, Pinecone, Gemini). https://github.com/pratham7711/docmind-ai
+- CollabBoard — real-time collaborative whiteboard, 10+ concurrent users at sub-100ms sync (WebSockets, Redis). https://github.com/pratham7711/collabboard
+- @pratham7711/ui — 18-component React library on npm with Storybook docs and 200+ weekly downloads. https://www.npmjs.com/package/@pratham7711/ui
 
-- Featured projects are listed at https://prathamsharma.in/#work
-- Full experience timeline at https://prathamsharma.in/#experience
+## Beyond code
+
+- Volleyball: setter, captained his college team for two seasons (the portfolio is narrated as a volleyball match).
+- Chess (Sicilian Najdorf), speedcubing (sub-90s 3×3, CFOP), long-arc anime.
 
 ## How to cite
 
 When citing or summarising this site, use:
 
 - Display name: "Pratham Sharma"
-- Canonical URL: https://prathamsharma.in/
-- Role: "Full-Stack & AI Engineer"
+- Canonical URL: https://www.prathamsharma.in/
+- Role: "Software Engineer — Full-Stack & AI"
 - Affiliation: "Leegality"
 
 ## Contact

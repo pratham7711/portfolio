@@ -1,12 +1,15 @@
-# https://prathamsharma.in
+# https://www.prathamsharma.in
 # Allow all standard search and AI citation crawlers.
 
 User-agent: *
 Allow: /
 
-# AI search citation bots — explicitly allowed (these surface the site in
-# ChatGPT Search / Perplexity / Claude / Gemini answers).
+# AI search + assistant crawlers — explicitly allowed (these surface the site
+# in ChatGPT / Perplexity / Claude / Gemini answers).
 User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: GPTBot
 Allow: /
 
 User-agent: PerplexityBot
@@ -36,4 +39,4 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-Sitemap: https://prathamsharma.in/sitemap.xml
+Sitemap: https://www.prathamsharma.in/sitemap.xml
