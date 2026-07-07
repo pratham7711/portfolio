@@ -56,10 +56,17 @@ export default function EngineerBridge() {
         // POV fades as the desk scene takes over
         .to(`.${styles.povDesk}`, { opacity: 0, duration: 0.3 }, '<')
         // desk video reveals from a clip mask
+        .to(`.${styles.frame}`, { opacity: 1, duration: 0.2 }, '<')
         .fromTo(
           `.${styles.frame}`,
           { clipPath: 'inset(18% 22% 18% 22% round 24px)' },
-          { clipPath: 'inset(0% 0% 0% 0% round 0px)', duration: 0.7, ease: 'power2.inOut' }
+          {
+            clipPath: 'inset(0% 0% 0% 0% round 0px)',
+            duration: 0.7,
+            ease: 'power2.inOut',
+            immediateRender: false,
+          },
+          '<'
         )
         .fromTo(
           `.${styles.video}`,

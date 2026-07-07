@@ -45,8 +45,9 @@
   position: absolute;
   inset: 0;
   clip-path: inset(18% 22% 18% 22% round 24px);
-  will-change: clip-path;
+  will-change: clip-path, opacity;
   overflow: hidden;
+  opacity: 0;
   z-index: 3;
 }
 
