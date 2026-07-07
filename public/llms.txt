@@ -12,11 +12,11 @@ This is the personal portfolio of Pratham Sharma (GitHub: pratham7711). The cano
 - Years of experience: 3+
 - Location: India
 - Email: prathamsharma7711@gmail.com
-- GitHub: https://github.com/pratham7711
-- LinkedIn: https://www.linkedin.com/in/pratham-sharma-a555b8207
-- LeetCode: https://leetcode.com/pratham7711/
-- npm: https://www.npmjs.com/~prathamsharma7711
-- Resume: https://www.prathamsharma.in/Pratham_Sharma_Resume.pdf
+- GitHub: [github.com/pratham7711](https://github.com/pratham7711)
+- LinkedIn: [linkedin.com/in/pratham-sharma-a555b8207](https://www.linkedin.com/in/pratham-sharma-a555b8207)
+- LeetCode: [leetcode.com/pratham7711](https://leetcode.com/pratham7711/)
+- npm: [npmjs.com/~prathamsharma7711](https://www.npmjs.com/~prathamsharma7711)
+- Resume: [Pratham_Sharma_Resume.pdf](https://www.prathamsharma.in/Pratham_Sharma_Resume.pdf)
 - Open to relocation: UAE, Germany, USA, Spain
 
 ## Experience
@@ -36,10 +36,10 @@ This is the personal portfolio of Pratham Sharma (GitHub: pratham7711). The cano
 
 ## Notable projects
 
-- Megakernel TTS — adapted a 1,200-line persistent CUDA megakernel as the decode backend for Qwen3-TTS; ~25ms time-to-first-chunk (RTF 0.12) on an RTX 5090. https://github.com/pratham7711/e3-megakernel-tts-takehome
-- DocMind AI — AI document intelligence with cited RAG answers in under 2 seconds (FastAPI, LangChain, Pinecone, Gemini). https://github.com/pratham7711/docmind-ai
-- CollabBoard — real-time collaborative whiteboard, 10+ concurrent users at sub-100ms sync (WebSockets, Redis). https://github.com/pratham7711/collabboard
-- @pratham7711/ui — 18-component React library on npm with Storybook docs and 200+ weekly downloads. https://www.npmjs.com/package/@pratham7711/ui
+- Megakernel TTS — adapted a 1,200-line persistent CUDA megakernel as the decode backend for Qwen3-TTS; ~25ms time-to-first-chunk (RTF 0.12) on an RTX 5090. [Repository](https://github.com/pratham7711/e3-megakernel-tts-takehome)
+- DocMind AI — AI document intelligence with cited RAG answers in under 2 seconds (FastAPI, LangChain, Pinecone, Gemini). [Repository](https://github.com/pratham7711/docmind-ai)
+- CollabBoard — real-time collaborative whiteboard, 10+ concurrent users at sub-100ms sync (WebSockets, Redis). [Repository](https://github.com/pratham7711/collabboard)
+- @pratham7711/ui — 18-component React library on npm with Storybook docs and 200+ weekly downloads. [npm package](https://www.npmjs.com/package/@pratham7711/ui)
 
 ## Beyond code
 

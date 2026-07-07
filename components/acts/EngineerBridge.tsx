@@ -3,7 +3,7 @@
 import { useRef, useEffect } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { DESK, SEQ_FRAMES } from '@/lib/data'
+import { DESK, POV, SEQ_FRAMES } from '@/lib/data'
 import FrameScrubber, { FrameScrubberHandle } from '@/components/FrameScrubber'
 import styles from './EngineerBridge.module.css'
 
@@ -33,7 +33,19 @@ export default function EngineerBridge() {
         },
       })
 
-      // line 1 — the hinge
+      // POV MATCH CUT — hands reach for the ball…
+      tl.fromTo(
+        `.${styles.povCourt}`,
+        { opacity: 1, scale: 1 },
+        { scale: 1.14, duration: 0.45, ease: 'power1.in' }
+      )
+        // …hard cut: same hands land on the keyboard (motion carries through)
+        .set(`.${styles.povCourt}`, { opacity: 0 })
+        .set(`.${styles.povDesk}`, { opacity: 1, scale: 1.14 }, '<')
+        .add(() => window.dispatchEvent(new Event('act:transition')), '<')
+        .to(`.${styles.povDesk}`, { scale: 1, duration: 0.45, ease: 'power2.out' })
+
+      // line 1 — the hinge, over the desk POV
       tl.fromTo(
         `.${styles.hinge}`,
         { opacity: 0, y: 40 },
@@ -41,6 +53,8 @@ export default function EngineerBridge() {
       )
         .to(`.${styles.hinge}`, { duration: 0.4 })
         .to(`.${styles.hinge}`, { opacity: 0, y: -40, duration: 0.2 })
+        // POV fades as the desk scene takes over
+        .to(`.${styles.povDesk}`, { opacity: 0, duration: 0.3 }, '<')
         // desk video reveals from a clip mask
         .fromTo(
           `.${styles.frame}`,
@@ -83,8 +97,14 @@ export default function EngineerBridge() {
 
   return (
     <section id="engineer" ref={wrapRef} className={styles.bridge} aria-label="The engineer">
+      {/* POV match cut layers */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={POV.court} alt="" aria-hidden className={styles.povCourt} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={POV.desk} alt="" aria-hidden className={styles.povDesk} />
+
       <p className={styles.hinge}>
-        Same player. <em>Different court.</em>
+        Same hands. <em>Different court.</em>
       </p>
 
       <div className={styles.frame}>

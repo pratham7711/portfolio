@@ -106,6 +106,11 @@ const SCRAMBLE_CHARS = '!<>-_\\/[]{}—=+*^?#$'
 function splitWords(el: HTMLElement) {
   if (el.dataset.split) return
   el.dataset.split = '1'
+  const sr = document.createElement('span')
+  sr.className = 'visually-hidden'
+  sr.textContent = el.textContent || ''
+  el.parentNode?.insertBefore(sr, el)
+  el.setAttribute('aria-hidden', 'true')
   const walk = (node: Node) => {
     if (node.nodeType === Node.TEXT_NODE) {
       const parts = (node.textContent || '').split(/(\s+)/)
@@ -177,7 +182,7 @@ export default function ActMind() {
           splitWords(text)
           gsap.fromTo(
             text.querySelectorAll('.reveal-word'),
-            { opacity: 0.1 },
+            { opacity: 0 },
             {
               opacity: 1,
               stagger: 0.4,

@@ -256,3 +256,9 @@ export const RALLY = [
 export const DESK = {
   seq: '/media/seq/desk',
 }
+
+/** POV match cut — hands reach for the ball ⟶ hands land on the keyboard. */
+export const POV = {
+  court: '/media/pov-court.webp',
+  desk: '/media/pov-desk.webp',
+}

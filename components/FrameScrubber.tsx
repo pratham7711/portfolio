@@ -21,7 +21,10 @@ const FrameScrubber = forwardRef<FrameScrubberHandle, FrameScrubberProps>(
       loaded: [] as boolean[],
       target: 0,
       drawn: -1,
-      started: false,
+      keyed: false,
+      filled: false,
+      armed: false,
+      fill: () => {},
     })
 
     const draw = (idx: number) => {
@@ -62,7 +65,9 @@ const FrameScrubber = forwardRef<FrameScrubberHandle, FrameScrubberProps>(
       s.images = []
       s.loaded = new Array(count).fill(false)
       s.drawn = -1
-      s.started = false
+      s.keyed = false
+      s.filled = false
+      s.armed = false
 
       const resize = () => {
         const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
@@ -75,18 +80,12 @@ const FrameScrubber = forwardRef<FrameScrubberHandle, FrameScrubberProps>(
       ro.observe(canvas)
       resize()
 
-      const startLoading = () => {
-        if (s.started) return
-        s.started = true
-
-        const order: number[] = [0]
-        for (let i = 6; i < count; i += 6) order.push(i)
-        for (let i = 0; i < count; i++) if (!order.includes(i)) order.push(i)
-
-        order.forEach((i, rank) => {
+      const loadFrames = (idxs: number[], eagerFirst: boolean) => {
+        idxs.forEach((i, rank) => {
+          if (s.images[i]) return
           const img = new Image()
           img.decoding = 'async'
-          if (rank > 0 || priority === 'low') img.fetchPriority = 'low'
+          if (rank > 0 || !eagerFirst) img.fetchPriority = 'low'
           img.onload = () => {
             s.loaded[i] = true
             const t = s.target
@@ -97,20 +96,44 @@ const FrameScrubber = forwardRef<FrameScrubberHandle, FrameScrubberProps>(
         })
       }
 
+      const startFill = () => {
+        if (!s.keyed || s.filled) return
+        s.filled = true
+        const rest: number[] = []
+        for (let i = 0; i < count; i++) if (!s.images[i]) rest.push(i)
+        loadFrames(rest, false)
+      }
+      s.fill = startFill
+
+      const startKeyframes = () => {
+        if (s.keyed) return
+        s.keyed = true
+        const order: number[] = [0]
+        for (let i = 6; i < count; i += 6) order.push(i)
+        loadFrames(order, priority === 'high')
+        if (s.armed) startFill()
+      }
+
       const ric: (cb: () => void) => void =
         typeof window.requestIdleCallback === 'function'
           ? (cb) => window.requestIdleCallback(cb, { timeout: 2000 })
           : (cb) => window.setTimeout(cb, 200)
 
+      const onFirstScroll = () => {
+        s.armed = true
+        startFill()
+      }
+      window.addEventListener('scroll', onFirstScroll, { once: true, passive: true })
+
       let io: IntersectionObserver | null = null
       if (priority === 'high') {
-        startLoading()
+        startKeyframes()
       } else {
         io = new IntersectionObserver(
           (entries) => {
             if (entries.some((e) => e.isIntersecting)) {
               io?.disconnect()
-              ric(startLoading)
+              ric(startKeyframes)
             }
           },
           { rootMargin: '800px 0px' }
@@ -121,6 +144,7 @@ const FrameScrubber = forwardRef<FrameScrubberHandle, FrameScrubberProps>(
       return () => {
         ro.disconnect()
         io?.disconnect()
+        window.removeEventListener('scroll', onFirstScroll)
       }
     }, [base, count, priority])
 
@@ -129,6 +153,10 @@ const FrameScrubber = forwardRef<FrameScrubberHandle, FrameScrubberProps>(
         const s = stateRef.current
         const idx = Math.max(0, Math.min(count - 1, Math.round(p * (count - 1))))
         s.target = idx
+        if (idx > 0 && !s.filled) {
+          s.armed = true
+          s.fill()
+        }
         if (idx !== s.drawn) draw(idx)
       },
     }))

@@ -8,6 +8,21 @@
   justify-content: center;
 }
 
+.povCourt,
+.povDesk {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  will-change: transform, opacity;
+  z-index: 2;
+}
+
+.povDesk {
+  opacity: 0;
+}
+
 .hinge {
   position: absolute;
   z-index: 4;
@@ -32,6 +47,7 @@
   clip-path: inset(18% 22% 18% 22% round 24px);
   will-change: clip-path;
   overflow: hidden;
+  z-index: 3;
 }
 
 .video {

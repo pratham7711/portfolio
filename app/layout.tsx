@@ -141,6 +141,15 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${grotesk.variable} ${fraunces.variable} ${mono.variable}`}>
+      <head>
+        {/* LCP: the first frame of the rally is the site's first paint */}
+        <link
+          rel="preload"
+          as="image"
+          href="/media/seq/rally-dig/001.webp"
+          fetchPriority="high"
+        />
+      </head>
       <body>
         <script
           type="application/ld+json"
